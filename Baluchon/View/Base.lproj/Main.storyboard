@@ -122,14 +122,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9wE-MM-lVu">
-                                                    <rect key="frame" x="20" y="10.999999999999998" width="87.333333333333329" height="26.333333333333332"/>
+                                                    <rect key="frame" x="20" y="13" width="77.666666666666671" height="23"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Amount" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XFp-ar-OyO">
-                                                    <rect key="frame" x="299" y="13" width="69" height="24"/>
+                                                    <rect key="frame" x="308" y="14.999999999999998" width="60" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                     <nil key="textColor"/>
@@ -235,10 +235,10 @@
                                     <constraint firstItem="BSl-GV-eRY" firstAttribute="width" secondItem="eBX-oy-UUl" secondAttribute="width" id="FCI-X6-yUO"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uNs-ZN-YJe">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uNs-ZN-YJe" userLabel="Translate text stackview">
                                 <rect key="frame" x="20" y="176" width="388" height="602"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text="Type your texte here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tx5-hX-J4C" userLabel="TextToTranslateView" customClass="TopRoundedTextView" customModule="Baluchon" customModuleProvider="target">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tx5-hX-J4C" userLabel="TextToTranslateView" customClass="TopRoundedTextView" customModule="Baluchon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="388" height="300"/>
                                         <color key="backgroundColor" name="textViewBackground"/>
                                         <color key="textColor" systemColor="labelColor"/>
@@ -283,10 +283,17 @@
                                     <action selector="translateButtonTouched" destination="tvT-HH-OEp" eventType="touchUpInside" id="IOR-t2-d6U"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type your text here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZ9-Yp-5w9">
+                                <rect key="frame" x="36" y="195" width="372" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <color key="textColor" systemColor="tertiaryLabelColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KoH-zh-OZb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="FZ9-Yp-5w9" firstAttribute="top" secondItem="Tx5-hX-J4C" secondAttribute="top" constant="19" id="4qe-6J-bw8"/>
                             <constraint firstItem="KoH-zh-OZb" firstAttribute="trailing" secondItem="uNs-ZN-YJe" secondAttribute="trailing" constant="20" id="5OW-C7-oI7"/>
                             <constraint firstItem="KoH-zh-OZb" firstAttribute="trailing" secondItem="Qqi-uR-VPi" secondAttribute="trailing" constant="40" id="9va-72-Prg"/>
                             <constraint firstItem="CIt-gG-Dsx" firstAttribute="leading" secondItem="KoH-zh-OZb" secondAttribute="leading" constant="20" id="BsF-oU-77v"/>
@@ -297,6 +304,8 @@
                             <constraint firstItem="Qqi-uR-VPi" firstAttribute="leading" secondItem="KoH-zh-OZb" secondAttribute="leading" constant="40" id="cXs-UR-MjU"/>
                             <constraint firstItem="CIt-gG-Dsx" firstAttribute="top" secondItem="KoH-zh-OZb" secondAttribute="top" constant="15" id="gU5-2u-eH8"/>
                             <constraint firstItem="q7h-kv-ABn" firstAttribute="leading" secondItem="KoH-zh-OZb" secondAttribute="leading" constant="20" id="iIY-Wf-giT"/>
+                            <constraint firstItem="KoH-zh-OZb" firstAttribute="trailing" secondItem="FZ9-Yp-5w9" secondAttribute="trailing" constant="20" id="mGb-gY-Tap"/>
+                            <constraint firstItem="FZ9-Yp-5w9" firstAttribute="leading" secondItem="Tx5-hX-J4C" secondAttribute="leading" constant="16" id="o3I-zp-QpH"/>
                             <constraint firstItem="uNs-ZN-YJe" firstAttribute="leading" secondItem="KoH-zh-OZb" secondAttribute="leading" constant="20" id="ofr-eJ-h4Y"/>
                             <constraint firstItem="Qqi-uR-VPi" firstAttribute="top" secondItem="uNs-ZN-YJe" secondAttribute="bottom" constant="15" id="uQO-1K-Sbb"/>
                             <constraint firstItem="KoH-zh-OZb" firstAttribute="bottom" secondItem="Qqi-uR-VPi" secondAttribute="bottom" constant="10" id="yEz-w9-Z9J"/>
@@ -307,6 +316,7 @@
                         <inset key="largeContentSizeImageInsets" minX="0.0" minY="-5" maxX="0.0" maxY="0.0"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="placeholderLabel" destination="FZ9-Yp-5w9" id="9Md-Kl-39C"/>
                         <outlet property="textToTranslateView" destination="Tx5-hX-J4C" id="apI-cW-cH6"/>
                         <outlet property="translatedTextView" destination="EMw-qQ-QQu" id="Ajq-6x-frG"/>
                     </connections>
@@ -577,6 +587,9 @@
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
