@@ -169,6 +169,8 @@
                         <imageReference key="image" image="exchange" symbolScale="large"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="exchangedMoneyField" destination="dtM-cQ-Z8V" id="MV2-XR-ohx"/>
+                        <outlet property="moneyToExchangeField" destination="Idu-SX-k8g" id="joU-In-Xvs"/>
                         <outlet property="tableView" destination="Rf1-nd-iDF" id="lfl-zV-Ifc"/>
                     </connections>
                 </viewController>
@@ -280,6 +282,9 @@
                                 <state key="normal" title="Translate">
                                     <color key="titleColor" name="AccentColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="translateButtonTouched" destination="tvT-HH-OEp" eventType="touchUpInside" id="IOR-t2-d6U"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KoH-zh-OZb"/>
@@ -304,6 +309,10 @@
                         <imageReference key="image" image="translate" symbolScale="large"/>
                         <inset key="largeContentSizeImageInsets" minX="0.0" minY="-5" maxX="0.0" maxY="0.0"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="textToTranslateView" destination="Tx5-hX-J4C" id="apI-cW-cH6"/>
+                        <outlet property="translatedTextView" destination="EMw-qQ-QQu" id="Ajq-6x-frG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TDg-jl-xfx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -350,6 +359,9 @@
                                             <constraint firstAttribute="width" constant="100" id="L1A-Y7-Vw8"/>
                                         </constraints>
                                         <buttonConfiguration key="configuration" style="plain" title="Add"/>
+                                        <connections>
+                                            <action selector="addCityButtonTouched" destination="cXs-NT-o08" eventType="touchUpInside" id="xUB-UG-PcJ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -532,6 +544,7 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="collectionView" destination="C3R-MH-j5q" id="zYE-8S-Ozl"/>
+                        <outlet property="newCityField" destination="RHH-xV-UT3" id="FGX-5H-zab"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YCo-bC-jOM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

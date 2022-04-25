@@ -10,6 +10,8 @@ import UIKit
 class ExchangeController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     private let data: [Exchange] = [Exchange(currency: "Euro", value: 1.3), Exchange(currency: "Pounds", value: 0.5)]
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var moneyToExchangeField: UITextField!
+    @IBOutlet weak var exchangedMoneyField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
