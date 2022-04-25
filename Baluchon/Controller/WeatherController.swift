@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WeatherController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class WeatherController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
     // MARK: Public
     // MARK: Outlets
     @IBOutlet weak var collectionView: UICollectionView!
@@ -18,6 +18,7 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
+        newCityField.delegate = self
     }
     
     // MARK: Methods
@@ -37,6 +38,12 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
         }
         
         return cell
+    }
+    
+    /// Function called when the return button of the keyboard is touched
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        newCityField.resignFirstResponder()
+        return true
     }
     
     // MARK: Actions
