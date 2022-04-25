@@ -18,10 +18,10 @@ class CollectionViewCell: UICollectionViewCell {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        
         self.layer.cornerRadius = 25
     }
     
+    /// Configure the collection view cell with a weather object
     func configure(with weather: Weather) {
         weatherConditionView.image = UIImage(named: weather.weatherCondition)
         cityLabel.text = weather.city

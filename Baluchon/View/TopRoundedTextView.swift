@@ -11,7 +11,7 @@ class TopRoundedTextView: UITextView {
 
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        self.contentInset = .init(top: 10, left: 10, bottom: 0, right: 0)
+        self.contentInset = .init(top: 10, left: 10, bottom: 0, right: 0) // Add margin to the text inside the view
         self.layer.cornerRadius = 25
         self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
