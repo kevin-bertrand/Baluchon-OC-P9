@@ -20,12 +20,20 @@ class ExchangeController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.dataSource = self
         setupTextFields()
+        exchangeRate.getRates()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateExchangeRate), name: Notification.BaluchonNotification.updateExchangeRate.notificationName, object: nil)
     }
     
     // MARK: Methods
+    @objc func updateExchangeRate() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
     /// Return the number of cell the table view will have
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data.count
+        exchangeRate.rates.count
     }
     
     /// Return a configurated cell
@@ -37,15 +45,15 @@ class ExchangeController: UIViewController, UITableViewDelegate, UITableViewData
         if #available(iOS 14.0, *) {
             // Configure the content of the cell
             var content = exchangeCell.defaultContentConfiguration()
-            content.text = data[indexPath.row].currency
-            content.secondaryText = "\(data[indexPath.row].value)"
+            content.text = exchangeRate.rates[indexPath.row].symbol
+            content.secondaryText = "\(exchangeRate.rates[indexPath.row].value) \(exchangeRate.rates[indexPath.row].currency)"
             
             // Set the configuration to the cell
             exchangeCell.contentConfiguration = content
         } else {
             // Configure the cell
-            exchangeCell.textLabel?.text = data[indexPath.row].currency
-            exchangeCell.detailTextLabel?.text = "\(data[indexPath.row].value)"
+            exchangeCell.textLabel?.text = exchangeRate.rates[indexPath.row].symbol
+            exchangeCell.detailTextLabel?.text = "\(exchangeRate.rates[indexPath.row].value) \(exchangeRate.rates[indexPath.row].currency)"
         }
         
         return exchangeCell
@@ -53,7 +61,7 @@ class ExchangeController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: Private
     // MARK: Properties
-    private let data: [Exchange] = [Exchange(currency: "Euro", value: 1.3), Exchange(currency: "Pounds", value: 0.5)]
+    private let exchangeRate = ExchangeRates()
     
     // MARK: Methods
     /// Setup a "Done" button on a toolbar above the keyboard

@@ -9,5 +9,6 @@ import Foundation
 
 struct Exchange {
     let currency: String
+    let symbol: String
     let value: Double
 }
