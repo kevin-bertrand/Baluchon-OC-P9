@@ -75,6 +75,9 @@ class ExchangeController: UIViewController, UITableViewDelegate, UITableViewData
         
         // Add the toolbar to the keyboard
         moneyToExchangeField.inputAccessoryView = toolbar
+        
+        // Adding target on didchange event
+        moneyToExchangeField.addTarget(self, action: #selector(moneyToExchangeDidChange), for: .editingChanged)
     }
     
     /// Function called when the done button of the keyboard's toolbar is pressed
@@ -82,4 +85,12 @@ class ExchangeController: UIViewController, UITableViewDelegate, UITableViewData
         view.endEditing(true)
     }
     
+    @objc private func moneyToExchangeDidChange() {
+        if let moneyToExchange = moneyToExchangeField.text,
+            let moneyToExchange = Double(moneyToExchange) {
+            exchangedMoneyField.text = exchangeRate.convertValue(moneyToExchange)
+        } else {
+            exchangedMoneyField.text = ""
+        }
+    }
 }

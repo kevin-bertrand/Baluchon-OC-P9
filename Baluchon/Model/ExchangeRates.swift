@@ -10,9 +10,12 @@ import Foundation
 class ExchangeRates {
     // MARK: Public
     // MARK: Properties
-//    var data: [Exchange] = [Exchange(currency: "Euro", symbol: "EUR", value: 1.3), Exchange(currency: "Pounds", symbol: "PND", value: 0.5)]
-    
     var rates: [Exchange] { _rates }
+    var convertedValue: String {
+        
+
+        return ""
+    }
     
     // MARK: Methods
     func getRates() {
@@ -20,6 +23,14 @@ class ExchangeRates {
             if let data = data, let exchangeData = try? JSONDecoder().decode(ExchangeData.self, from: data){
                 print(exchangeData)
             }
+        }
+    }
+    
+    func convertValue(_ value: Double) -> String {
+        if let rate = _rates.first(where: { $0.currency == "USD" }) {
+            return String(value * rate.value)
+        } else {
+            return ""
         }
     }
     
