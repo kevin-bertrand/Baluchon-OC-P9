@@ -109,7 +109,7 @@ class ExchangeController: UIViewController {
     
     /// Get the result of the exchange
     @objc private func moneyToExchangeDidChange() {
-        if let moneyToExchange = moneyToExchangeField.text,
+        if let moneyToExchange = moneyToExchangeField.text?.replacingOccurrences(of: ",", with: "."),
            let moneyToExchange = Double(moneyToExchange) {
             exchangedMoneyField.text = exchangeRate.convertValue(moneyToExchange)
         } else {

@@ -17,16 +17,14 @@ class ExchangeRates {
     // MARK: Methods
     func getRates() {
         _getRates { data in
-            if let data = data, let exchangeData = try? JSONDecoder().decode(ExchangeData.self, from: data){
-                print(exchangeData)
-            }
         }
     }
     
     func convertValue(_ value: Double) -> String {
         if let rateToEuro = _rates.first(where: {$0.currency == startLanguage}),
             let endRate = _rates.first(where: { $0.currency == exchangedCurrency }) {
-            return String((value / rateToEuro.value) * endRate.value)
+            let exchangedValue = (value / rateToEuro.value) * endRate.value
+            return String(format: "%.3f", exchangedValue)
         } else {
             return ""
         }
