@@ -12,6 +12,8 @@
 		06210BEE2816E44A00D5E3E6 /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06210BED2816E44A00D5E3E6 /* Exchange.swift */; };
 		06210BF02816F8BF00D5E3E6 /* ExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06210BEF2816F8BF00D5E3E6 /* ExchangeRates.swift */; };
 		06210BF22817E19900D5E3E6 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06210BF12817E19900D5E3E6 /* Notification.swift */; };
+		06210BF4281839D300D5E3E6 /* TranslationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06210BF3281839D300D5E3E6 /* TranslationAPI.swift */; };
+		06210BF628183A3C00D5E3E6 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06210BF528183A3C00D5E3E6 /* Translation.swift */; };
 		062E673B2816C975005AACE4 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062E673A2816C975005AACE4 /* CollectionViewCell.swift */; };
 		062E673D2816CE55005AACE4 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062E673C2816CE55005AACE4 /* Weather.swift */; };
 		062E67432816D177005AACE4 /* WeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062E67422816D177005AACE4 /* WeatherController.swift */; };
@@ -51,6 +53,8 @@
 		06210BED2816E44A00D5E3E6 /* Exchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
 		06210BEF2816F8BF00D5E3E6 /* ExchangeRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRates.swift; sourceTree = "<group>"; };
 		06210BF12817E19900D5E3E6 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		06210BF3281839D300D5E3E6 /* TranslationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationAPI.swift; sourceTree = "<group>"; };
+		06210BF528183A3C00D5E3E6 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		062E673A2816C975005AACE4 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		062E673C2816CE55005AACE4 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		062E67422816D177005AACE4 /* WeatherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherController.swift; sourceTree = "<group>"; };
@@ -120,9 +124,9 @@
 			isa = PBXGroup;
 			children = (
 				06C5527D2812E6FA0048C41C /* Supporting Files */,
+				06C5527A2812E6EE0048C41C /* Model */,
 				06C5527C2812E6F60048C41C /* Controller */,
 				06C5527B2812E6F20048C41C /* View */,
-				06C5527A2812E6EE0048C41C /* Model */,
 			);
 			path = Baluchon;
 			sourceTree = "<group>";
@@ -150,6 +154,8 @@
 				062E673C2816CE55005AACE4 /* Weather.swift */,
 				06210BED2816E44A00D5E3E6 /* Exchange.swift */,
 				06210BEF2816F8BF00D5E3E6 /* ExchangeRates.swift */,
+				06210BF3281839D300D5E3E6 /* TranslationAPI.swift */,
+				06210BF528183A3C00D5E3E6 /* Translation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -324,6 +330,7 @@
 				062E673B2816C975005AACE4 /* CollectionViewCell.swift in Sources */,
 				062E67472816D311005AACE4 /* ExchangeController.swift in Sources */,
 				06C552482812E6DE0048C41C /* AppDelegate.swift in Sources */,
+				06210BF4281839D300D5E3E6 /* TranslationAPI.swift in Sources */,
 				06210BF02816F8BF00D5E3E6 /* ExchangeRates.swift in Sources */,
 				06210BEA2816E00100D5E3E6 /* TopRoundedTextView.swift in Sources */,
 				06210BEE2816E44A00D5E3E6 /* Exchange.swift in Sources */,
@@ -333,6 +340,7 @@
 				062E67432816D177005AACE4 /* WeatherController.swift in Sources */,
 				06210BEC2816E08D00D5E3E6 /* BottomRoundedTextView.swift in Sources */,
 				062E67452816D2F7005AACE4 /* TranslateController.swift in Sources */,
+				06210BF628183A3C00D5E3E6 /* Translation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

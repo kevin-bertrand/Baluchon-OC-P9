@@ -10,6 +10,7 @@ import Foundation
 extension Notification {
     enum BaluchonNotification: String, CaseIterable {
         case updateExchangeRate
+        case updateTranslation
         
         var notificationName: Notification.Name {
             return Notification.Name(rawValue: "\(self)")
