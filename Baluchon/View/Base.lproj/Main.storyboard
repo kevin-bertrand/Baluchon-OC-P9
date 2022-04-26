@@ -59,35 +59,38 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="au1-qY-6SX" userLabel="Devices names">
-                                <rect key="frame" x="20" y="121" width="388" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="au1-qY-6SX" userLabel="Devices names">
+                                <rect key="frame" x="20" y="121" width="388" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Euro (€)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-x5-AEt">
-                                        <rect key="frame" x="0.0" y="0.0" width="194" height="30"/>
+                                    <label opaque="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="▼ Euro (EUR)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-x5-AEt">
+                                        <rect key="frame" x="0.0" y="0.0" width="186.66666666666666" height="40"/>
+                                        <color key="tintColor" name="AccentColor"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" name="AccentColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dollars ($)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JcL-at-dwn">
-                                        <rect key="frame" x="194" y="0.0" width="194" height="30"/>
+                                    <label opaque="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dollars (USD) ▼" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JcL-at-dwn">
+                                        <rect key="frame" x="201.66666666666663" y="0.0" width="186.33333333333337" height="40"/>
+                                        <color key="tintColor" name="AccentColor"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" name="AccentColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="JcL-at-dwn" firstAttribute="width" secondItem="Hz6-x5-AEt" secondAttribute="width" id="0SI-RV-llv"/>
+                                    <constraint firstAttribute="height" constant="40" id="VnR-sE-dzc"/>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="4K5-Mf-aM1">
-                                <rect key="frame" x="20" y="171" width="388" height="34"/>
+                                <rect key="frame" x="20" y="181" width="388" height="34"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Idu-SX-k8g">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Idu-SX-k8g">
                                         <rect key="frame" x="0.0" y="0.0" width="174" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                     </textField>
-                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dtM-cQ-Z8V">
+                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dtM-cQ-Z8V">
                                         <rect key="frame" x="214" y="0.0" width="174" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -98,20 +101,20 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Sq-sf-fVg">
-                                <rect key="frame" x="20" y="230" width="388" height="1"/>
+                                <rect key="frame" x="20" y="240" width="388" height="1"/>
                                 <color key="backgroundColor" systemColor="separatorColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="dvy-hb-o5C"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rates: 1 EUR =" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LoZ-NF-JJE">
-                                <rect key="frame" x="20" y="251" width="388" height="30"/>
+                                <rect key="frame" x="20" y="261" width="388" height="30"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Rf1-nd-iDF">
-                                <rect key="frame" x="20" y="289" width="388" height="554"/>
+                                <rect key="frame" x="20" y="299" width="388" height="544"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="exchangeRateCell" textLabel="9wE-MM-lVu" detailTextLabel="XFp-ar-OyO" style="IBUITableViewCellStyleValue1" id="3Up-rT-uFF">
@@ -170,7 +173,9 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="exchangedMoneyField" destination="dtM-cQ-Z8V" id="MV2-XR-ohx"/>
+                        <outlet property="languageToTranslateLabel" destination="JcL-at-dwn" id="qkl-XY-9MZ"/>
                         <outlet property="moneyToExchangeField" destination="Idu-SX-k8g" id="joU-In-Xvs"/>
+                        <outlet property="startLanguageLabel" destination="Hz6-x5-AEt" id="LAE-gi-eMk"/>
                         <outlet property="tableView" destination="Rf1-nd-iDF" id="lfl-zV-Ifc"/>
                     </connections>
                 </viewController>

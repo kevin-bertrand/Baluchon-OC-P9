@@ -11,15 +11,12 @@ class ExchangeRates {
     // MARK: Public
     // MARK: Properties
     var rates: [Exchange] { _rates }
-    var convertedValue: String {
-        
-
-        return ""
-    }
+    var exchangedCurrency: String = "USD"
+    var startLanguage: String = "EUR"
     
     // MARK: Methods
     func getRates() {
-        getRates { data in
+        _getRates { data in
             if let data = data, let exchangeData = try? JSONDecoder().decode(ExchangeData.self, from: data){
                 print(exchangeData)
             }
@@ -27,8 +24,9 @@ class ExchangeRates {
     }
     
     func convertValue(_ value: Double) -> String {
-        if let rate = _rates.first(where: { $0.currency == "USD" }) {
-            return String(value * rate.value)
+        if let rateToEuro = _rates.first(where: {$0.currency == startLanguage}),
+            let endRate = _rates.first(where: { $0.currency == exchangedCurrency }) {
+            return String((value / rateToEuro.value) * endRate.value)
         } else {
             return ""
         }
@@ -36,12 +34,12 @@ class ExchangeRates {
     
     // MARK: Private
     // MARK: Properties
-    private let _rateUrl = URL(string: "http://data.fixer.io/api/latest?access_key=d266eca0a81e01912c00972d3c550bc1&base=EUR")!
+    private let _rateUrl = URL(string: "http://data.fixer.io/api/latest?access_key=d266eca0a81e01912c00972d3c550bc1")!
     private let _symbolsUrl = URL(string: "http://data.fixer.io/api/symbols?access_key=d266eca0a81e01912c00972d3c550bc1")!
     private var _rates: [Exchange] = []
     
     // MARK: Methods
-    private func getRates(completionHandler: @escaping ((Data?) -> Void)) {
+    private func _getRates(completionHandler: @escaping ((Data?) -> Void)) {
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: _rateUrl) { data, response, error in
             if let response = response as? HTTPURLResponse,
@@ -51,6 +49,7 @@ class ExchangeRates {
                 self.getSymbols { data in
                     if let data = data,
                         let symbolsData = try? JSONDecoder().decode(ExchangeSymbols.self, from: data) {
+                        self._rates = []
                         for exchangeRate in exchangeData.rates {
                             if let symbol = symbolsData.symbols.first(where: {$0.key == exchangeRate.key}) {
                                 self._rates.append(Exchange(currency: exchangeRate.key, symbol: symbol.value, value: exchangeRate.value))
