@@ -13,16 +13,25 @@ class NetworkManager {
     static let shared = NetworkManager()
     
     // MARK: Methods
-    func performApiRequest(for url: URL?, completionHandler: @escaping ((Data?) -> Void)) {
-        let session = URLSession(configuration: .default)
+    func performApiRequest(for url: String, urlParams: [String: String], httpMethod: HttpMethod, completionHandler: @escaping ((Data?) -> Void)) {
+        guard var components = URLComponents(string: url) else { return completionHandler(nil) }
+        components.queryItems = [URLQueryItem]()
         
-        guard let url = url else {
+        for (key, value) in urlParams {
+            components.queryItems?.append(URLQueryItem(name: key, value: value))
+        }
+        
+        guard let url = components.url else {
             return completionHandler(nil)
         }
         
-        let task = session.dataTask(with: url) { data, response, error in
+        var request = URLRequest(url: url)
+        request.httpMethod = httpMethod.rawValue
+        let session = URLSession(configuration: .default)
+        
+        let task = session.dataTask(with: request) { data, response, error in
             if let response = response as? HTTPURLResponse,
-               response.statusCode == 200 {
+               response.statusCode == 200 || response.statusCode == 201 {
                 completionHandler(data)
             } else {
                 completionHandler(nil)
@@ -30,8 +39,14 @@ class NetworkManager {
         }
         task.resume()
     }
+    
     // MARK: Private
     // MARK: Properties
     
     // MARK: Methods
+}
+
+enum HttpMethod: String {
+    case get = "GET"
+    case post = "POST"
 }

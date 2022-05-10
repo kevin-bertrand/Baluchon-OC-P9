@@ -23,7 +23,7 @@ class WeatherManager {
                 // 2 - Get temperature
                 self._getTemperature(of: cityData, isCurrentLocation: false)
             } else {
-                self._sendNotification(for: .cityDoesntExist)
+                NotificationManager.shared.sendFor(.cityDoesntExist)
             }
         }
     }
@@ -37,13 +37,14 @@ class WeatherManager {
     // MARK: Properties
     private var _weathers: [Weather] = []
     private let _apiKey = "dfd64c07c118f713c2866795defbe20f"
-    private let _getLocationCityURL = "http://api.openweathermap.org/geo/1.0/direct?q="
-    private let _getWeatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat="
+    private let _getLocationCityURL = "http://api.openweathermap.org/geo/1.0/direct?"
+    private let _getWeatherUrl = "https://api.openweathermap.org/data/2.5/weather?"
     
     // MARK: Methods
     /// Getting coordinates from a given city name
     private func _getCoordinatesOf(city: String, completionHandler: @escaping ((CityInformations?) -> Void)) {
-        NetworkManager.shared.performApiRequest(for: URL(string: "\(_getLocationCityURL)\(city)&appid=\(_apiKey)")) { data in
+        let urlParams = ["q": city, "appid":_apiKey]
+        NetworkManager.shared.performApiRequest(for: _getLocationCityURL, urlParams: urlParams, httpMethod: .get) { data in
             if let data = data,
                let cityData = try? JSONDecoder().decode([CityInformations].self, from: data),
                let cityData = cityData.first {
@@ -56,7 +57,8 @@ class WeatherManager {
     
     /// Getting temperature of a given point with its coordinates.
     private func _getTemperature(of coordinates: CityInformations, isCurrentLocation: Bool) {
-        NetworkManager.shared.performApiRequest(for: URL(string: "\(_getWeatherUrl)\(coordinates.lat)&lon=\(coordinates.lon)&units=metric&appid=\(_apiKey)")) { data in
+        let urlParams = ["lat": "\(coordinates.lat)", "lon": "\(coordinates.lon)", "units":"metric", "appid": _apiKey]
+        NetworkManager.shared.performApiRequest(for: _getWeatherUrl, urlParams: urlParams, httpMethod: .get) { data in
             if let data = data,
                 var weatherData = try? JSONDecoder().decode(Weather.self, from: data) {
                 // Check if a name was given when checking coordinates (more precise than name on weather forecasts).
@@ -72,11 +74,11 @@ class WeatherManager {
                 // Download the condition icon
                 self._dowloadConditionImage(for: weatherData) { weather in
                     self._weathers.append(weather)
-                    self._sendNotification(for: .updateWeather)
+                    NotificationManager.shared.sendFor(.updateWeather)
                 }
             } else {
                 // If there is an error during downloading the temperature -> sending a notification error
-                self._sendNotification(for: .errorDuringDownloadingWeather)
+                NotificationManager.shared.sendFor(.errorDuringDownloadingWeather)
             }
         }
     }
@@ -85,7 +87,7 @@ class WeatherManager {
     private func _checkIfCityIsAlreadyShown(_ cityName: String?) -> Bool {
         if let cityName = cityName,
            self._weathers.contains(where: { $0.name == cityName}) {
-            self._sendNotification(for: .cityAlreadyAdded)
+            NotificationManager.shared.sendFor(.cityAlreadyAdded)
             return true
         } else {
             return false
@@ -94,7 +96,7 @@ class WeatherManager {
     
     /// Getting the icon of the current weather condition
     private func _dowloadConditionImage(for weather: Weather, completionHandler: @escaping((Weather) -> Void)) {
-        NetworkManager.shared.performApiRequest(for: URL(string:  "http://openweathermap.org/img/wn/\(weather.weather[0].icon)@2x.png")) { data in
+        NetworkManager.shared.performApiRequest(for: "http://openweathermap.org/img/wn/\(weather.weather[0].icon)@2x.png", urlParams: [:], httpMethod: .get) { data in
             if let icon = data {
                 var newWeatherInformations = weather
                 newWeatherInformations.icon = icon
@@ -103,12 +105,5 @@ class WeatherManager {
                 completionHandler(weather)
             }
         }
-    }
-    
-    /// Configure and send a notification to the controller
-    private func _sendNotification(for errorName: Notification.BaluchonNotification) {
-        let notificationName = errorName.notificationName
-        let notification = Notification(name: notificationName, object: self, userInfo: ["name": errorName.notificationName])
-        NotificationCenter.default.post(notification)
     }
 }
