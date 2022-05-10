@@ -23,12 +23,12 @@ class CollectionViewCell: UICollectionViewCell {
     
     /// Configure the collection view cell with a weather object
     func configure(with weather: Weather) {
-        weatherConditionView.image = UIImage(named: weather.weatherCondition)
-        cityLabel.text = weather.city
-        temperatureLabel.text = "\(weather.temperature) °C"
-        minimumTemperatureLabel.text = "Min: \(weather.minTemperature) °C"
-        maximumTemperatureLabel.text = "Max: \(weather.maxTemperature) °C"
-        sunriseLabel.text = weather.sunrise
-        sunsetLabel.text = weather.sunset
+        weatherConditionView.image = UIImage(named: weather.weather[0].main)
+        cityLabel.text = weather.name
+        temperatureLabel.text = "\(weather.main.temp) °C"
+        minimumTemperatureLabel.text = "Min: \(weather.main.temp_min) °C"
+        maximumTemperatureLabel.text = "Max: \(weather.main.temp_max) °C"
+        sunriseLabel.text = "\(weather.sys.sunrise)"
+        sunsetLabel.text = "\(weather.sys.sunset)"
     }
 }

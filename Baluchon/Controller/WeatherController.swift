@@ -19,12 +19,14 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
         collectionView.delegate = self
         collectionView.dataSource = self
         newCityField.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateWeather), name: Notification.BaluchonNotification.updateWeather.notificationName, object: nil)
     }
     
     // MARK: Methods
     /// Return the number of cell the collection view will have
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+        return weather.weathers.count
     }
     
     /// Return a configurated cell
@@ -33,7 +35,7 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
         
         // Get a reusable cell with a specific identifier and with the "CollectionViewCell" class
         if let weatherCell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherCell", for: indexPath) as? CollectionViewCell {
-            weatherCell.configure(with: data[indexPath.row])
+            weatherCell.configure(with: weather.weathers[indexPath.row])
             cell = weatherCell
         }
         
@@ -48,9 +50,16 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
     
     // MARK: Actions
     @IBAction func addCityButtonTouched() {
+        weather.getTemperatureOf(city: newCityField.text ?? "")
     }
     
     // MARK: Private
     // MARK: Properties
-    private let data: [Weather] = [Weather(city: "Saint-Remy-en-Bouzemont-Saint-Genest-et-Isson ", weatherCondition: "sunny", temperature: "10.0", minTemperature: "3", maxTemperature: "15", sunrise: "6:10", sunset: "20:54"), Weather(city: "Paris", weatherCondition: "rain", temperature: "15", minTemperature: "5", maxTemperature: "20", sunrise: "6:00", sunset: "21:00"), Weather(city: "Paris", weatherCondition: "snow", temperature: "15", minTemperature: "5", maxTemperature: "20", sunrise: "6:00", sunset: "21:00"), Weather(city: "Paris", weatherCondition: "bolt", temperature: "15", minTemperature: "5", maxTemperature: "20", sunrise: "6:00", sunset: "21:00"), Weather(city: "Paris", weatherCondition: "cloudSunAndRain", temperature: "15", minTemperature: "5", maxTemperature: "20", sunrise: "6:00", sunset: "21:00"), Weather(city: "Paris", weatherCondition: "cloudAndSun", temperature: "15", minTemperature: "5", maxTemperature: "20", sunrise: "6:00", sunset: "21:00")]
+    private let weather = WeatherManager()
+    
+    @objc private func updateWeather() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
 }

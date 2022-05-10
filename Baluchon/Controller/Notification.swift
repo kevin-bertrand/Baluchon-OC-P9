@@ -11,6 +11,7 @@ extension Notification {
     enum BaluchonNotification: String, CaseIterable {
         case updateExchangeRate
         case updateTranslation
+        case updateWeather
         
         var notificationName: Notification.Name {
             return Notification.Name(rawValue: "\(self)")
