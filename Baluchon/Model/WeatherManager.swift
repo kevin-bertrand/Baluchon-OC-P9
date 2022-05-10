@@ -16,8 +16,14 @@ class WeatherManager {
     func getTemperatureOf(city: String) {
         _getCoordinatesOf(city: city) { weatherData in
             if let weatherData = weatherData {
-                self.weathers.append(weatherData)
-                self.sendNotification(for: .updateWeather)
+                if self.weathers.contains(where: { $0.name == weatherData.name}) {
+                    self.sendNotification(for: .cityAlreadyAdded)
+                } else {
+                    self.weathers.append(weatherData)
+                    self.sendNotification(for: .updateWeather)
+                }
+            } else {
+                self.sendNotification(for: .cityDoesntExist)
             }
         }
     }

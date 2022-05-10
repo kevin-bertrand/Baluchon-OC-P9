@@ -21,7 +21,11 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
         collectionView.dataSource = self
         newCityField.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateWeather), name: Notification.BaluchonNotification.updateWeather.notificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(processNotification), name: Notification.BaluchonNotification.updateWeather.notificationName, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(processNotification), name: Notification.BaluchonNotification.cityDoesntExist.notificationName, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(processNotification), name: Notification.BaluchonNotification.cityAlreadyAdded.notificationName, object: nil)
     }
     
     // MARK: Methods
@@ -54,8 +58,8 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
         if var newCity = newCityField.text {
             newCity = newCity.replacingOccurrences(of: " ", with: "-")
             newCity = newCity.folding(options: .diacriticInsensitive, locale: nil)
-            print(newCity)
             weather.getTemperatureOf(city: newCity)
+            newCityField.text = ""
         }
     }
     
@@ -63,9 +67,29 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
     // MARK: Properties
     private let weather = WeatherManager()
     
-    @objc private func updateWeather() {
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
+    // MARK: Methods
+    /// Process notificaitons
+    @objc private func processNotification(_ notification: Notification) {
+        if let notificationName = notification.userInfo?["name"] as? Notification.Name {
+            DispatchQueue.main.async {
+                switch notificationName {
+                case Notification.BaluchonNotification.cityAlreadyAdded.notificationName:
+                    self.showAlertViewFor(notification: .cityAlreadyAdded)
+                case Notification.BaluchonNotification.cityDoesntExist.notificationName:
+                    self.showAlertViewFor(notification: .cityDoesntExist)
+                case Notification.BaluchonNotification.updateWeather.notificationName:
+                        self.collectionView.reloadData()
+                default:
+                    return
+                }
+            }
         }
+    }
+    
+    /// Show alert view
+    private func showAlertViewFor(notification: Notification.BaluchonNotification) {
+        let alert = UIAlertController(title: "Error", message: notification.notificationMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
     }
 }
