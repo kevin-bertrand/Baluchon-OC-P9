@@ -43,7 +43,7 @@ struct Temperatures: Codable {
 }
 
 struct CityInformations: Codable {
-    let name: String
+    let name: String?
     let lat: Double
     let lon: Double
 }

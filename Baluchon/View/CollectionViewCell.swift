@@ -49,6 +49,7 @@ class CollectionViewCell: UICollectionViewCell {
         sunsetLabel.text = getTime(for: weather.sys.sunset, timezone: weather.timezone)
     }
     
+    /// Get the local time of a city according to the timezone
     private func getTime(for time: Date, timezone: Int) -> String {
         let dateFormater = DateFormatter()
         dateFormater.timeZone = TimeZone(secondsFromGMT: timezone)
