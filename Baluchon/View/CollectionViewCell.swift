@@ -23,7 +23,11 @@ class CollectionViewCell: UICollectionViewCell {
     
     /// Configure the collection view cell with a weather object
     func configure(with weather: Weather) {
-        weatherConditionView.image = UIImage(named: weather.weather[0].main)
+        print(weather)
+        if let data = weather.icon {
+            weatherConditionView.image = UIImage(data: data)
+        }
+
         cityLabel.text = "\(weather.name), \(weather.sys.country)"
         temperatureLabel.text = "\(weather.main.temp) °C"
         minimumTemperatureLabel.text = "Min: \(weather.main.temp_min) °C"

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Weather: Codable {
     var name: String
@@ -13,6 +14,7 @@ struct Weather: Codable {
     let coord: Coordinates
     let weather: [Conditions]
     let main: Temperatures
+    var icon: Data?
 }
 
 struct SunInformations: Codable {
@@ -28,6 +30,7 @@ struct Coordinates: Codable {
 
 struct Conditions: Codable {
     let main: String
+    let icon: String
 }
 
 struct Temperatures: Codable {

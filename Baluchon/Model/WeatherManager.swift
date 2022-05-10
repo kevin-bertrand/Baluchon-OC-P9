@@ -19,8 +19,10 @@ class WeatherManager {
                 if self.weathers.contains(where: { $0.name == weatherData.name}) {
                     self.sendNotification(for: .cityAlreadyAdded)
                 } else {
-                    self.weathers.append(weatherData)
-                    self.sendNotification(for: .updateWeather)
+                    self.dowloadConditionImage(for: weatherData) { weather in
+                        self.weathers.append(weather)
+                        self.sendNotification(for: .updateWeather)
+                    }
                 }
             } else {
                 self.sendNotification(for: .cityDoesntExist)
@@ -84,5 +86,24 @@ class WeatherManager {
         let notificationName = errorName.notificationName
         let notification = Notification(name: notificationName, object: self, userInfo: ["name": errorName.notificationName])
         NotificationCenter.default.post(notification)
+    }
+    
+    private func dowloadConditionImage(for weather: Weather, completionHandler: @escaping((Weather) -> Void)) {
+        if let imageUrl = URL(string:  "http://openweathermap.org/img/wn/\(weather.weather[0].icon)@2x.png") {
+            let session = URLSession(configuration: .default)
+            let task = session.dataTask(with: imageUrl) { data, response, error in
+                if let icon = data {
+                    var newWeatherInformations = weather
+                    newWeatherInformations.icon = icon
+                    print(newWeatherInformations)
+                    completionHandler(newWeatherInformations)
+                } else {
+                    completionHandler(weather)
+                }
+            }
+            task.resume()
+        } else {
+            completionHandler(weather)
+        }
     }
 }
