@@ -15,12 +15,13 @@ struct Weather: Codable {
     let weather: [Conditions]
     let main: Temperatures
     var icon: Data?
+    let timezone: Int
 }
 
 struct SunInformations: Codable {
     let country: String
-    let sunrise: Int
-    let sunset: Int
+    let sunrise: Date
+    let sunset: Date
 }
 
 struct Coordinates: Codable {
@@ -30,6 +31,7 @@ struct Coordinates: Codable {
 
 struct Conditions: Codable {
     let main: String
+    let description: String
     let icon: String
 }
 
