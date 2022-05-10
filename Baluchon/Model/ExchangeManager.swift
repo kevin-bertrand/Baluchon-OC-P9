@@ -32,8 +32,12 @@ class ExchangeManager {
                         }
                         self._rates = self._rates.sorted { $0.currency < $1.currency }
                         NotificationManager.shared.sendFor(.updateExchangeRate)
+                    } else {
+                        NotificationManager.shared.sendFor(.errorDuringDownloadRates)
                     }
                 }
+            } else {
+                NotificationManager.shared.sendFor(.errorDuringDownloadRates)
             }
         }
     }

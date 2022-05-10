@@ -9,9 +9,11 @@ import Foundation
 
 extension Notification {
     enum BaluchonNotification: String, CaseIterable {
+        // Exchange notifications
         case updateExchangeRate
+        case errorDuringDownloadRates = "An error occurs during the download of the rates... Please verify your connection!"
         
-        // Translation notification
+        // Translation notifications
         case updateTranslation
         case errorDuringTranslating = "An error occurs during the translation. Please try again!"
         

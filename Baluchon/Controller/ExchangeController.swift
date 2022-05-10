@@ -29,6 +29,8 @@ class ExchangeController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(_updateExchangeRate), name: Notification.BaluchonNotification.updateExchangeRate.notificationName, object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(_showAlertViewFor), name: Notification.BaluchonNotification.errorDuringDownloadRates.notificationName, object: nil)
+        
         _addTapGestureRecogniser(to: targetCurrencyLabel, perform: #selector(_displayPicker))
         _addTapGestureRecogniser(to: startCurrencyLabel, perform: #selector(_displayPicker))
     }
@@ -96,6 +98,37 @@ class ExchangeController: UIViewController {
         return toolbar
     }
     
+    /// Configure picker
+    private func _configurePicker(height: Double) {
+        _currencyPicker.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: height)
+        _currencyPicker.backgroundColor = .init(named: "defaultBackground")
+        _configurePickerContainer(heigh: height)
+    }
+    
+    /// Configure the picker container
+    private func _configurePickerContainer(heigh: Double) {
+        // Set up the picker container
+        _containerView.frame = CGRect(x: 0, y: self.view.bounds.height, width: view.bounds.width, height: heigh)
+        
+        _containerView.addSubview(_currencyPicker)
+        _containerView.addSubview(_configurePickerToolbar())
+        view.addSubview(_containerView)
+    }
+    
+    /// Configure the toolbar with the "done" button for the picker
+    private func _configurePickerToolbar() -> UIToolbar {
+        let doneToolbar = _createDoneToolbar(with: #selector(_dismissPicker))
+        doneToolbar.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 45)
+        return doneToolbar
+    }
+    
+    /// Dismiss the picker
+    @objc private func _dismissPicker() {
+        UIView.animate(withDuration: 0.2) {
+            self._containerView.frame.origin.y = self.view.frame.height
+        }
+    }
+    
     /// Update rates when receive notification
     @objc private func _updateExchangeRate() {
         DispatchQueue.main.async {
@@ -134,35 +167,11 @@ class ExchangeController: UIViewController {
         }
     }
     
-    /// Configure picker
-    private func _configurePicker(height: Double) {
-        _currencyPicker.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: height)
-        _currencyPicker.backgroundColor = .init(named: "defaultBackground")
-        _configurePickerContainer(heigh: height)
-    }
-    
-    /// Configure the picker container
-    private func _configurePickerContainer(heigh: Double) {
-        // Set up the picker container
-        _containerView.frame = CGRect(x: 0, y: self.view.bounds.height, width: view.bounds.width, height: heigh)
-        
-        _containerView.addSubview(_currencyPicker)
-        _containerView.addSubview(_configurePickerToolbar())
-        view.addSubview(_containerView)
-    }
-    
-    /// Configure the toolbar with the "done" button for the picker
-    private func _configurePickerToolbar() -> UIToolbar {
-        let doneToolbar = _createDoneToolbar(with: #selector(_dismissPicker))
-        doneToolbar.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 45)
-        return doneToolbar
-    }
-    
-    /// Dismiss the picker
-    @objc private func _dismissPicker() {
-        UIView.animate(withDuration: 0.2) {
-            self._containerView.frame.origin.y = self.view.frame.height
-        }
+    /// Getting alert and show an UIAlert
+    @objc private func _showAlertViewFor() {
+        let alert = UIAlertController(title: "Error", message: Notification.BaluchonNotification.errorDuringDownloadRates.notificationMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
     }
 }
 
