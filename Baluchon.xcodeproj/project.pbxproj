@@ -10,7 +10,7 @@
 		06210BEA2816E00100D5E3E6 /* TopRoundedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06210BE92816E00100D5E3E6 /* TopRoundedTextView.swift */; };
 		06210BEC2816E08D00D5E3E6 /* BottomRoundedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06210BEB2816E08D00D5E3E6 /* BottomRoundedTextView.swift */; };
 		06210BEE2816E44A00D5E3E6 /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06210BED2816E44A00D5E3E6 /* Exchange.swift */; };
-		06210BF02816F8BF00D5E3E6 /* ExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06210BEF2816F8BF00D5E3E6 /* ExchangeRates.swift */; };
+		06210BF02816F8BF00D5E3E6 /* ExchangeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06210BEF2816F8BF00D5E3E6 /* ExchangeManager.swift */; };
 		06210BF22817E19900D5E3E6 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06210BF12817E19900D5E3E6 /* Notification.swift */; };
 		06210BF4281839D300D5E3E6 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06210BF3281839D300D5E3E6 /* Translation.swift */; };
 		06210BF628183A3C00D5E3E6 /* TranslationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06210BF528183A3C00D5E3E6 /* TranslationManager.swift */; };
@@ -54,7 +54,7 @@
 		06210BE92816E00100D5E3E6 /* TopRoundedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRoundedTextView.swift; sourceTree = "<group>"; };
 		06210BEB2816E08D00D5E3E6 /* BottomRoundedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomRoundedTextView.swift; sourceTree = "<group>"; };
 		06210BED2816E44A00D5E3E6 /* Exchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
-		06210BEF2816F8BF00D5E3E6 /* ExchangeRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRates.swift; sourceTree = "<group>"; };
+		06210BEF2816F8BF00D5E3E6 /* ExchangeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeManager.swift; sourceTree = "<group>"; };
 		06210BF12817E19900D5E3E6 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		06210BF3281839D300D5E3E6 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		06210BF528183A3C00D5E3E6 /* TranslationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationManager.swift; sourceTree = "<group>"; };
@@ -157,15 +157,15 @@
 		06C5527A2812E6EE0048C41C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				062E673C2816CE55005AACE4 /* Weather.swift */,
 				06210BED2816E44A00D5E3E6 /* Exchange.swift */,
-				06210BEF2816F8BF00D5E3E6 /* ExchangeRates.swift */,
+				06210BEF2816F8BF00D5E3E6 /* ExchangeManager.swift */,
 				06210BF3281839D300D5E3E6 /* Translation.swift */,
 				06210BF528183A3C00D5E3E6 /* TranslationManager.swift */,
+				062E673C2816CE55005AACE4 /* Weather.swift */,
 				06210BF92818481100D5E3E6 /* WeatherManager.swift */,
 				06B74175282AC0A200323171 /* NetworkManager.swift */,
-				06B74177282AE1EC00323171 /* NotificationManager.swift */,
 				06210BF12817E19900D5E3E6 /* Notification.swift */,
+				06B74177282AE1EC00323171 /* NotificationManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -340,7 +340,7 @@
 				062E67472816D311005AACE4 /* ExchangeController.swift in Sources */,
 				06C552482812E6DE0048C41C /* AppDelegate.swift in Sources */,
 				06210BF4281839D300D5E3E6 /* Translation.swift in Sources */,
-				06210BF02816F8BF00D5E3E6 /* ExchangeRates.swift in Sources */,
+				06210BF02816F8BF00D5E3E6 /* ExchangeManager.swift in Sources */,
 				06210BEA2816E00100D5E3E6 /* TopRoundedTextView.swift in Sources */,
 				06210BEE2816E44A00D5E3E6 /* Exchange.swift in Sources */,
 				06210BF22817E19900D5E3E6 /* Notification.swift in Sources */,

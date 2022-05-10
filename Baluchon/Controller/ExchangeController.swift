@@ -13,36 +13,30 @@ class ExchangeController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var moneyToExchangeField: UITextField!
     @IBOutlet weak var exchangedMoneyField: UITextField!
-    @IBOutlet weak var languageToTranslateLabel: UILabel!
-    @IBOutlet weak var startLanguageLabel: UILabel!
+    @IBOutlet weak var targetCurrencyLabel: UILabel!
+    @IBOutlet weak var startCurrencyLabel: UILabel!
     
     // MARK: Initialisation function
     override func viewDidLoad() {
         super.viewDidLoad()
-        containerView = UIView()
-        currencyPicker = UIPickerView()
+        _containerView = UIView()
+        _currencyPicker = UIPickerView()
         
-        delegateSetup()
-        dataSourceSetup()
-        setupTextFields()
-        exchangeRate.getRates()
+        _delegateSetup()
+        _dataSourceSetup()
+        _setupTextFields()
+        _exchangeRate.getRates()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateExchangeRate), name: Notification.BaluchonNotification.updateExchangeRate.notificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(_updateExchangeRate), name: Notification.BaluchonNotification.updateExchangeRate.notificationName, object: nil)
         
-        addTapGestureRecogniser(to: languageToTranslateLabel, perform: #selector(displayPicker))
-        addTapGestureRecogniser(to: startLanguageLabel, perform: #selector(displayPicker))
+        _addTapGestureRecogniser(to: targetCurrencyLabel, perform: #selector(_displayPicker))
+        _addTapGestureRecogniser(to: startCurrencyLabel, perform: #selector(_displayPicker))
     }
     
     // MARK: Methods
-    @objc func updateExchangeRate() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-    
     /// Return the number of cell the table view will have
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        exchangeRate.rates.count
+        _exchangeRate.rates.count
     }
     
     /// Return a configurated cell
@@ -54,15 +48,15 @@ class ExchangeController: UIViewController {
         if #available(iOS 14.0, *) {
             // Configure the content of the cell
             var content = exchangeCell.defaultContentConfiguration()
-            content.text = exchangeRate.rates[indexPath.row].symbol
-            content.secondaryText = "\(exchangeRate.rates[indexPath.row].value) \(exchangeRate.rates[indexPath.row].currency)"
+            content.text = _exchangeRate.rates[indexPath.row].symbol
+            content.secondaryText = "\(_exchangeRate.rates[indexPath.row].value) \(_exchangeRate.rates[indexPath.row].currency)"
             
             // Set the configuration to the cell
             exchangeCell.contentConfiguration = content
         } else {
             // Configure the cell
-            exchangeCell.textLabel?.text = exchangeRate.rates[indexPath.row].symbol
-            exchangeCell.detailTextLabel?.text = "\(exchangeRate.rates[indexPath.row].value) \(exchangeRate.rates[indexPath.row].currency)"
+            exchangeCell.textLabel?.text = _exchangeRate.rates[indexPath.row].symbol
+            exchangeCell.detailTextLabel?.text = "\(_exchangeRate.rates[indexPath.row].value) \(_exchangeRate.rates[indexPath.row].currency)"
         }
         
         return exchangeCell
@@ -70,28 +64,28 @@ class ExchangeController: UIViewController {
     
     // MARK: Private
     // MARK: Properties
-    private let exchangeRate = ExchangeRates()
-    private var currencyPicker: UIPickerView!
-    private var containerView: UIView!
-    private var selectedPicker: Int = 0
+    private let _exchangeRate = ExchangeManager()
+    private var _currencyPicker: UIPickerView!
+    private var _containerView: UIView!
+    private var _selectedPicker: Int = 0
     
     // MARK: Methods
     /// Adding gesture recogniser to a view
-    private func addTapGestureRecogniser(to view: UIView, perform selector: Selector) {
+    private func _addTapGestureRecogniser(to view: UIView, perform selector: Selector) {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: selector))
     }
     
     /// Setup a "Done" button on a toolbar above the keyboard
-    private func setupTextFields() {
+    private func _setupTextFields() {
         // Add the toolbar to the keyboard
-        moneyToExchangeField.inputAccessoryView = createDoneToolbar(with: #selector(dismissKeyboard))
+        moneyToExchangeField.inputAccessoryView = _createDoneToolbar(with: #selector(_dismissKeyboard))
         
         // Adding target on didchange event
-        moneyToExchangeField.addTarget(self, action: #selector(moneyToExchangeDidChange), for: .editingChanged)
+        moneyToExchangeField.addTarget(self, action: #selector(_moneyToExchangeDidChange), for: .editingChanged)
     }
     
-    /// Configure the toolbar with done button for keuboard and pickers
-    private func createDoneToolbar(with selector: Selector) -> UIToolbar {
+    /// Configure the toolbar with done button for keyboard and pickers
+    private func _createDoneToolbar(with selector: Selector) -> UIToolbar {
         let toolbar = UIToolbar()
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: selector)
@@ -102,101 +96,106 @@ class ExchangeController: UIViewController {
         return toolbar
     }
     
+    /// Update rates when receive notification
+    @objc private func _updateExchangeRate() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
     /// Function called when the done button of the keyboard's toolbar is pressed
-    @objc private func dismissKeyboard() {
+    @objc private func _dismissKeyboard() {
         view.endEditing(true)
     }
     
     /// Get the result of the exchange
-    @objc private func moneyToExchangeDidChange() {
+    @objc private func _moneyToExchangeDidChange() {
         if let moneyToExchange = moneyToExchangeField.text?.replacingOccurrences(of: ",", with: "."),
            let moneyToExchange = Double(moneyToExchange) {
-            exchangedMoneyField.text = exchangeRate.convertValue(moneyToExchange)
+            exchangedMoneyField.text = _exchangeRate.convertValue(moneyToExchange)
         } else {
             exchangedMoneyField.text = ""
         }
     }
     
-    @objc private func displayPicker(sender: UITapGestureRecognizer) {
+    /// Display a UIPickerView
+    @objc private func _displayPicker(sender: UITapGestureRecognizer) {
         if let selectedPickerTag = sender.view?.tag {
-            selectedPicker = selectedPickerTag
+            _selectedPicker = selectedPickerTag
         }
         
         let pickerViewHeight = self.view.bounds.height / 3
-        configurePicker(height: pickerViewHeight)
-        dismissKeyboard()
+        _configurePicker(height: pickerViewHeight)
+        _dismissKeyboard()
         
         // Animation
         UIView.animate(withDuration: 0.2) {
-            self.containerView.frame.origin.y = (self.view.frame.height - pickerViewHeight - (self.tabBarController?.tabBar.frame.size.height ?? 0)/2)
+            self._containerView.frame.origin.y = (self.view.frame.height - pickerViewHeight - (self.tabBarController?.tabBar.frame.size.height ?? 0)/2)
         }
     }
     
     /// Configure picker
-    private func configurePicker(height: Double) {
-        currencyPicker.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: height)
-        currencyPicker.backgroundColor = .init(named: "defaultBackground")
-        configurePickerContainer(heigh: height)
+    private func _configurePicker(height: Double) {
+        _currencyPicker.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: height)
+        _currencyPicker.backgroundColor = .init(named: "defaultBackground")
+        _configurePickerContainer(heigh: height)
     }
     
     /// Configure the picker container
-    private func configurePickerContainer(heigh: Double) {
+    private func _configurePickerContainer(heigh: Double) {
         // Set up the picker container
-        containerView.frame = CGRect(x: 0, y: self.view.bounds.height, width: view.bounds.width, height: heigh)
+        _containerView.frame = CGRect(x: 0, y: self.view.bounds.height, width: view.bounds.width, height: heigh)
         
-        containerView.addSubview(currencyPicker)
-        containerView.addSubview(configurePickerToolbar())
-        view.addSubview(containerView)
+        _containerView.addSubview(_currencyPicker)
+        _containerView.addSubview(_configurePickerToolbar())
+        view.addSubview(_containerView)
     }
     
     /// Configure the toolbar with the "done" button for the picker
-    private func configurePickerToolbar() -> UIToolbar {
-        let doneToolbar = createDoneToolbar(with: #selector(dismissPicker))
+    private func _configurePickerToolbar() -> UIToolbar {
+        let doneToolbar = _createDoneToolbar(with: #selector(_dismissPicker))
         doneToolbar.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 45)
         return doneToolbar
     }
     
     /// Dismiss the picker
-    @objc private func dismissPicker() {
+    @objc private func _dismissPicker() {
         UIView.animate(withDuration: 0.2) {
-            self.containerView.frame.origin.y = self.view.frame.height
+            self._containerView.frame.origin.y = self.view.frame.height
         }
     }
 }
 
 // MARK: Delegate extension
 extension ExchangeController: UIPickerViewDelegate, UITableViewDelegate {
-    /// Setup delegates for this controller
-    private func delegateSetup() {
-        tableView.delegate = self
-        currencyPicker.delegate = self
-    }
-    
+    // MARK: Public method
     /// Called when an item is selected
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch selectedPicker {
+        switch _selectedPicker {
         case 1:
-            exchangeRate.startLanguage = exchangeRate.rates[row].currency
-            moneyToExchangeDidChange()
-            startLanguageLabel.text = "▼ \(exchangeRate.rates[row].symbol) (\(exchangeRate.rates[row].currency))"
+            _exchangeRate.startLanguage = _exchangeRate.rates[row].currency
+            _moneyToExchangeDidChange()
+            startCurrencyLabel.text = "▼ \(_exchangeRate.rates[row].symbol) (\(_exchangeRate.rates[row].currency))"
         case 2:
-            exchangeRate.exchangedCurrency = exchangeRate.rates[row].currency
-            moneyToExchangeDidChange()
-            languageToTranslateLabel.text = "\(exchangeRate.rates[row].symbol) (\(exchangeRate.rates[row].currency)) ▼"
+            _exchangeRate.exchangedCurrency = _exchangeRate.rates[row].currency
+            _moneyToExchangeDidChange()
+            targetCurrencyLabel.text = "\(_exchangeRate.rates[row].symbol) (\(_exchangeRate.rates[row].currency)) ▼"
         default:
             break
         }
+    }
+    
+    // MARK: Private method
+    /// Setup delegates for this controller
+    private func _delegateSetup() {
+        tableView.delegate = self
+        _currencyPicker.delegate = self
     }
 }
 
 // MARK: Data Source extension
 extension ExchangeController: UIPickerViewDataSource, UITableViewDataSource {
-    /// Setup the source of data for views
-    private func dataSourceSetup() {
-        tableView.dataSource = self
-//        currencyPicker.dataSource = self
-    }
-    
+    // MARK: Public methods
     /// Return the number of column the picker will have
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -204,11 +203,17 @@ extension ExchangeController: UIPickerViewDataSource, UITableViewDataSource {
     
     /// Return a cell of the picker. Called once per item
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(exchangeRate.rates[row].symbol) (\(exchangeRate.rates[row].currency))"
+        return "\(_exchangeRate.rates[row].symbol) (\(_exchangeRate.rates[row].currency))"
     }
     
     /// Return the number of items in the picker
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return exchangeRate.rates.count
+        return _exchangeRate.rates.count
+    }
+    
+    // MARK: Private method
+    /// Setup the source of data for views
+    private func _dataSourceSetup() {
+        tableView.dataSource = self
     }
 }

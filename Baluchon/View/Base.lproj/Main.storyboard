@@ -173,10 +173,10 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="exchangedMoneyField" destination="dtM-cQ-Z8V" id="MV2-XR-ohx"/>
-                        <outlet property="languageToTranslateLabel" destination="JcL-at-dwn" id="qkl-XY-9MZ"/>
                         <outlet property="moneyToExchangeField" destination="Idu-SX-k8g" id="joU-In-Xvs"/>
-                        <outlet property="startLanguageLabel" destination="Hz6-x5-AEt" id="LAE-gi-eMk"/>
+                        <outlet property="startCurrencyLabel" destination="Hz6-x5-AEt" id="LAE-gi-eMk"/>
                         <outlet property="tableView" destination="Rf1-nd-iDF" id="lfl-zV-Ifc"/>
+                        <outlet property="targetCurrencyLabel" destination="JcL-at-dwn" id="qkl-XY-9MZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CAw-UG-QXl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

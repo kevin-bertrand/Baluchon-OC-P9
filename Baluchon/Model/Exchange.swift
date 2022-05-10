@@ -12,3 +12,12 @@ struct Exchange {
     let symbol: String
     let value: Double
 }
+
+struct ExchangeData: Codable {
+    let base: String
+    let rates: [String: Double]
+}
+
+struct ExchangeSymbols: Codable {
+    let symbols: [String: String]
+}
