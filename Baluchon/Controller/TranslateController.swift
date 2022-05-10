@@ -21,6 +21,8 @@ class TranslateController: UIViewController, UITextViewDelegate {
         
         // Configure notification reception to update translated text view
         NotificationCenter.default.addObserver(self, selector: #selector(_updateTranslation), name: Notification.BaluchonNotification.updateTranslation.notificationName, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(_showAlertView), name: Notification.BaluchonNotification.errorDuringTranslating.notificationName, object: nil)
     }
     
     // MARK: Actions
@@ -48,5 +50,12 @@ class TranslateController: UIViewController, UITextViewDelegate {
         DispatchQueue.main.async {
             self.translatedTextView.text = self._translation.translatedText
         }
+    }
+    
+    /// Getting alert and show an UIAlert
+    @objc private func _showAlertView() {
+        let alert = UIAlertController(title: "Error", message: Notification.BaluchonNotification.errorDuringTranslating.notificationMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
     }
 }
