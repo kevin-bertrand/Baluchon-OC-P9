@@ -21,21 +21,21 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
         collectionView.delegate = self
         collectionView.dataSource = self
         newCityField.delegate = self
-        locationManager.delegate = self
+        _locationManager.delegate = self
         
-        locationManager.desiredAccuracy=kCLLocationAccuracyBest
+        _locationManager.desiredAccuracy=kCLLocationAccuracyBest
         
-        NotificationCenter.default.addObserver(self, selector: #selector(processNotification), name: Notification.BaluchonNotification.updateWeather.notificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(_processNotification), name: Notification.BaluchonNotification.updateWeather.notificationName, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(processNotification), name: Notification.BaluchonNotification.cityDoesntExist.notificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(_processNotification), name: Notification.BaluchonNotification.cityDoesntExist.notificationName, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(processNotification), name: Notification.BaluchonNotification.cityAlreadyAdded.notificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(_processNotification), name: Notification.BaluchonNotification.cityAlreadyAdded.notificationName, object: nil)
     }
     
     // MARK: Methods
     /// Return the number of cell the collection view will have
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return weather.weathers.count
+        return _weather.weathers.count
     }
     
     /// Return a configurated cell
@@ -44,7 +44,7 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
         
         // Get a reusable cell with a specific identifier and with the "CollectionViewCell" class
         if let weatherCell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherCell", for: indexPath) as? CollectionViewCell {
-            weatherCell.configure(with: weather.weathers[indexPath.row])
+            weatherCell.configure(with: _weather.weathers[indexPath.row])
             cell = weatherCell
         }
         
@@ -58,9 +58,9 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        locationManager.stopUpdatingLocation()
+        _locationManager.stopUpdatingLocation()
         if let location = locations.first {
-            weather.getTemperatureFromCoordinates(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
+            _weather.getTemperatureFromCoordinates(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
         }
     }
     
@@ -69,35 +69,35 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
         if var newCity = newCityField.text {
             newCity = newCity.replacingOccurrences(of: " ", with: "-")
             newCity = newCity.folding(options: .diacriticInsensitive, locale: nil)
-            weather.getTemperatureOf(city: newCity)
+            _weather.getTemperatureOf(city: newCity)
             newCityField.text = ""
             newCityField.resignFirstResponder()
         }
     }
     
     @IBAction func getCurrentLocationWeatherButtonTouched() {
-        locationManager.requestWhenInUseAuthorization()
+        _locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
-            locationManager.startUpdatingLocation()
+            _locationManager.startUpdatingLocation()
         }
     }
     
     // MARK: Private
     // MARK: Properties
-    private let weather = WeatherManager()
-    private let locationManager = CLLocationManager()
+    private let _weather = WeatherManager()
+    private let _locationManager = CLLocationManager()
     
     // MARK: Methods
     /// Process notificaitons
-    @objc private func processNotification(_ notification: Notification) {
+    @objc private func _processNotification(_ notification: Notification) {
         if let notificationName = notification.userInfo?["name"] as? Notification.Name {
             DispatchQueue.main.async {
                 switch notificationName {
                 case Notification.BaluchonNotification.cityAlreadyAdded.notificationName:
-                    self.showAlertViewFor(notification: .cityAlreadyAdded)
+                    self._showAlertViewFor(notification: .cityAlreadyAdded)
                 case Notification.BaluchonNotification.cityDoesntExist.notificationName:
-                    self.showAlertViewFor(notification: .cityDoesntExist)
+                    self._showAlertViewFor(notification: .cityDoesntExist)
                 case Notification.BaluchonNotification.updateWeather.notificationName:
                         self.collectionView.reloadData()
                 default:
@@ -108,7 +108,7 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     /// Show alert view
-    private func showAlertViewFor(notification: Notification.BaluchonNotification) {
+    private func _showAlertViewFor(notification: Notification.BaluchonNotification) {
         let alert = UIAlertController(title: "Error", message: notification.notificationMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true)
