@@ -57,11 +57,16 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
         return true
     }
     
+    /// Called when the user location changed
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        _locationManager.stopUpdatingLocation()
         if let location = locations.first {
             _weather.getTemperatureFromCoordinates(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
         }
+    }
+    
+    /// Called when an error occurs during getting user location
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        _showAlertViewFor(notification: .errorDuringDownloadingWeather)
     }
     
     // MARK: Actions
@@ -79,7 +84,7 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
         _locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
-            _locationManager.startUpdatingLocation()
+            _locationManager.requestLocation()
         }
     }
     
