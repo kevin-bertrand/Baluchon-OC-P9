@@ -26,5 +26,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Allow access to get your location weather conditions</string>
 </dict>
 </plist>

@@ -30,6 +30,24 @@ class WeatherManager {
         }
     }
     
+    func getTemperatureFromCoordinates(lat: Double, lon: Double) {
+        _getTemperature(of: Coordinates(lat: lat, lon: lon)) { weather in
+            if var weather = weather {
+                weather.currentLocation = true
+                if self.weathers.contains(where: { $0.name == weather.name}) {
+                    self.sendNotification(for: .cityAlreadyAdded)
+                } else {
+                    self.dowloadConditionImage(for: weather) { weather in
+                        self.weathers.append(weather)
+                        self.sendNotification(for: .updateWeather)
+                    }
+                }
+            } else {
+                self.sendNotification(for: .cannotGetCurrentLocation)
+            }
+        }
+    }
+    
     // MARK: Private
     // MARK: Properties
     private let _apiKey = "dfd64c07c118f713c2866795defbe20f"
@@ -49,8 +67,15 @@ class WeatherManager {
                let data = data,
                let cityData = try? JSONDecoder().decode([CityInformations].self, from: data),
                 let cityData = cityData.first {
-                self._getTemperature(of: cityData) { weather in
-                    completionHandler(weather)
+                self._getTemperature(of: Coordinates(lat: cityData.lat, lon: cityData.lon)) { weather in
+                    var cityInformation: Weather?
+                    
+                    if let weather = weather {
+                        cityInformation = weather
+                        cityInformation?.name = cityData.name
+                    }
+
+                    completionHandler(cityInformation)
                 }
             } else {
                 return completionHandler(nil)
@@ -59,9 +84,9 @@ class WeatherManager {
         task.resume()
     }
     
-    private func _getTemperature(of city: CityInformations, completionHandler: @escaping ((Weather?) -> Void)) {
+    private func _getTemperature(of coordinates: Coordinates, completionHandler: @escaping ((Weather?) -> Void)) {
         let session = URLSession(configuration: .default)
-        let url = "\(_getWeatherUrl)\(city.lat)&lon=\(city.lon)&units=metric&appid=\(_apiKey)"
+        let url = "\(_getWeatherUrl)\(coordinates.lat)&lon=\(coordinates.lon)&units=metric&appid=\(_apiKey)"
 
         guard let url = URL(string: url) else {
             return completionHandler(nil)
@@ -71,8 +96,7 @@ class WeatherManager {
             if let response = response as? HTTPURLResponse,
                response.statusCode == 200,
                let data = data,
-               var weatherData = try? JSONDecoder().decode(Weather.self, from: data) {
-                weatherData.name = city.name
+               let weatherData = try? JSONDecoder().decode(Weather.self, from: data) {
                 completionHandler(weatherData)
             } else {
                 completionHandler(nil)
@@ -95,7 +119,6 @@ class WeatherManager {
                 if let icon = data {
                     var newWeatherInformations = weather
                     newWeatherInformations.icon = icon
-                    print(newWeatherInformations)
                     completionHandler(newWeatherInformations)
                 } else {
                     completionHandler(weather)

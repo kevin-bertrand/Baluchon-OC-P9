@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import CoreLocation
 import UIKit
 
-class WeatherController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
+class WeatherController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, CLLocationManagerDelegate {
     // MARK: Public
     // MARK: Outlets
     @IBOutlet weak var collectionView: UICollectionView!
@@ -20,6 +21,9 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
         collectionView.delegate = self
         collectionView.dataSource = self
         newCityField.delegate = self
+        locationManager.delegate = self
+        
+        locationManager.desiredAccuracy=kCLLocationAccuracyBest
         
         NotificationCenter.default.addObserver(self, selector: #selector(processNotification), name: Notification.BaluchonNotification.updateWeather.notificationName, object: nil)
         
@@ -53,6 +57,13 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
         return true
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        locationManager.stopUpdatingLocation()
+        if let location = locations.first {
+            weather.getTemperatureFromCoordinates(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
+        }
+    }
+    
     // MARK: Actions
     @IBAction func addCityButtonTouched() {
         if var newCity = newCityField.text {
@@ -60,12 +71,22 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
             newCity = newCity.folding(options: .diacriticInsensitive, locale: nil)
             weather.getTemperatureOf(city: newCity)
             newCityField.text = ""
+            newCityField.resignFirstResponder()
+        }
+    }
+    
+    @IBAction func getCurrentLocationWeatherButtonTouched() {
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
         }
     }
     
     // MARK: Private
     // MARK: Properties
     private let weather = WeatherManager()
+    private let locationManager = CLLocationManager()
     
     // MARK: Methods
     /// Process notificaitons

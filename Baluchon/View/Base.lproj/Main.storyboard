@@ -358,15 +358,27 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="VNv-dV-fqS">
-                                <rect key="frame" x="20" y="121" width="388" height="34"/>
+                                <rect key="frame" x="20" y="121" width="388" height="35"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hVB-WG-Oea">
+                                        <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="SSZ-c5-6Sb"/>
+                                            <constraint firstAttribute="width" secondItem="hVB-WG-Oea" secondAttribute="height" id="ceI-h3-j6h"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="location"/>
+                                        <connections>
+                                            <action selector="getCurrentLocationWeatherButtonTouched" destination="cXs-NT-o08" eventType="touchUpInside" id="t2Y-yh-t6I"/>
+                                        </connections>
+                                    </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New York City" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="RHH-xV-UT3">
-                                        <rect key="frame" x="0.0" y="0.0" width="263" height="34"/>
+                                        <rect key="frame" x="60" y="0.0" width="203" height="35"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBc-kQ-AKQ">
-                                        <rect key="frame" x="288" y="0.0" width="100" height="34"/>
+                                        <rect key="frame" x="288" y="0.0" width="100" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="L1A-Y7-Vw8"/>
                                         </constraints>
@@ -378,7 +390,7 @@
                                 </subviews>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="C3R-MH-j5q">
-                                <rect key="frame" x="20" y="175" width="388" height="658"/>
+                                <rect key="frame" x="20" y="176" width="388" height="657"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cm3-Uu-8Ff">
                                     <size key="itemSize" width="277" height="242"/>
@@ -395,17 +407,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oQF-tc-11G">
-                                                    <rect key="frame" x="15" y="75.333333333333329" width="247" height="55.666666666666671"/>
+                                                    <rect key="frame" x="15" y="81" width="247" height="50"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aPc-Qh-iGK">
-                                                            <rect key="frame" x="0.0" y="3" width="50" height="50"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="aPc-Qh-iGK" secondAttribute="height" id="hGr-xQ-k0K"/>
                                                                 <constraint firstAttribute="width" constant="50" id="yT3-vD-TE8"/>
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z8i-R9-gE9">
-                                                            <rect key="frame" x="58" y="13" width="189" height="30"/>
+                                                            <rect key="frame" x="58" y="10" width="189" height="30"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="102 °F" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kov-fJ-ORT">
                                                                     <rect key="frame" x="0.0" y="0.0" width="159" height="30"/>
@@ -424,12 +436,27 @@
                                                         </stackView>
                                                     </subviews>
                                                 </stackView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paris, FR" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uMj-V0-7LF">
-                                                    <rect key="frame" x="15" y="15" width="247" height="30"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qe5-ja-DNX">
+                                                    <rect key="frame" x="15" y="15" width="247" height="40"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paris, FR" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uMj-V0-7LF">
+                                                            <rect key="frame" x="0.0" y="0.0" width="197" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="zi9-ev-Pgr"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="dvC-Dm-DfQ">
+                                                            <rect key="frame" x="207" y="0.0" width="40" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="dvC-Dm-DfQ" secondAttribute="height" id="bqu-QE-Yzn"/>
+                                                            </constraints>
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="a0V-VI-iHT">
                                                     <rect key="frame" x="20" y="151" width="237" height="75"/>
                                                     <subviews>
@@ -508,7 +535,7 @@
                                                     </constraints>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunny" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPJ-be-FC7">
-                                                    <rect key="frame" x="15" y="50" width="247" height="20.333333333333329"/>
+                                                    <rect key="frame" x="15" y="60" width="247" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -516,25 +543,26 @@
                                             </subviews>
                                             <color key="backgroundColor" name="textViewBackground"/>
                                             <constraints>
-                                                <constraint firstItem="VPJ-be-FC7" firstAttribute="top" secondItem="uMj-V0-7LF" secondAttribute="bottom" constant="5" id="1Ce-iz-Fzm"/>
                                                 <constraint firstItem="oQF-tc-11G" firstAttribute="leading" secondItem="2Zk-nl-ZVx" secondAttribute="leading" constant="15" id="2VA-5g-jGh"/>
                                                 <constraint firstItem="a0V-VI-iHT" firstAttribute="top" secondItem="oQF-tc-11G" secondAttribute="bottom" constant="20" id="6pb-SF-gsi"/>
-                                                <constraint firstItem="uMj-V0-7LF" firstAttribute="top" secondItem="2Zk-nl-ZVx" secondAttribute="top" constant="15" id="HJA-YA-8jo"/>
-                                                <constraint firstItem="VPJ-be-FC7" firstAttribute="leading" secondItem="uMj-V0-7LF" secondAttribute="leading" id="LDT-7f-z5f"/>
+                                                <constraint firstAttribute="trailing" secondItem="qe5-ja-DNX" secondAttribute="trailing" constant="15" id="6xd-oc-Ect"/>
                                                 <constraint firstItem="a0V-VI-iHT" firstAttribute="leading" secondItem="2Zk-nl-ZVx" secondAttribute="leading" constant="20" id="LQm-sv-5Kq"/>
+                                                <constraint firstItem="qe5-ja-DNX" firstAttribute="top" secondItem="2Zk-nl-ZVx" secondAttribute="top" constant="15" id="NAi-0H-EqX"/>
                                                 <constraint firstItem="oQF-tc-11G" firstAttribute="top" secondItem="VPJ-be-FC7" secondAttribute="bottom" constant="5" id="R2L-zM-BIj"/>
                                                 <constraint firstAttribute="trailing" secondItem="oQF-tc-11G" secondAttribute="trailing" constant="15" id="WHV-4R-uqZ"/>
+                                                <constraint firstItem="VPJ-be-FC7" firstAttribute="trailing" secondItem="qe5-ja-DNX" secondAttribute="trailing" id="ab8-xo-7mJ"/>
                                                 <constraint firstAttribute="bottom" secondItem="a0V-VI-iHT" secondAttribute="bottom" constant="16" id="bxL-SW-dv0"/>
-                                                <constraint firstItem="VPJ-be-FC7" firstAttribute="trailing" secondItem="uMj-V0-7LF" secondAttribute="trailing" id="g8o-8U-NTN"/>
+                                                <constraint firstItem="VPJ-be-FC7" firstAttribute="leading" secondItem="qe5-ja-DNX" secondAttribute="leading" id="i38-as-E34"/>
+                                                <constraint firstItem="qe5-ja-DNX" firstAttribute="leading" secondItem="2Zk-nl-ZVx" secondAttribute="leading" constant="15" id="iSj-aq-brm"/>
                                                 <constraint firstAttribute="trailing" secondItem="a0V-VI-iHT" secondAttribute="trailing" constant="20" id="kys-aM-20L"/>
-                                                <constraint firstAttribute="trailing" secondItem="uMj-V0-7LF" secondAttribute="trailing" constant="15" id="lk7-ZW-aMc"/>
-                                                <constraint firstItem="uMj-V0-7LF" firstAttribute="leading" secondItem="2Zk-nl-ZVx" secondAttribute="leading" constant="15" id="wn7-Mv-VTD"/>
+                                                <constraint firstItem="VPJ-be-FC7" firstAttribute="top" secondItem="qe5-ja-DNX" secondAttribute="bottom" constant="5" id="obU-Ky-jIU"/>
                                                 <constraint firstItem="VPJ-be-FC7" firstAttribute="leading" secondItem="oQF-tc-11G" secondAttribute="trailing" constant="-228" id="xhn-4Q-vdB"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="277" height="242"/>
                                         <connections>
                                             <outlet property="cityLabel" destination="uMj-V0-7LF" id="ZXg-8v-vFG"/>
+                                            <outlet property="isCurrentLocationImage" destination="dvC-Dm-DfQ" id="jBT-ew-daz"/>
                                             <outlet property="maximumTemperatureLabel" destination="nTZ-81-ViY" id="jyp-zz-42b"/>
                                             <outlet property="minimumTemperatureLabel" destination="7PZ-nW-N88" id="ZCW-qf-bqn"/>
                                             <outlet property="sunriseLabel" destination="goJ-np-krb" id="Xdp-7P-lc0"/>
@@ -577,6 +605,7 @@
     </scenes>
     <resources>
         <image name="exchange" width="12" height="12"/>
+        <image name="location" width="153.66667175292969" height="153.66667175292969"/>
         <image name="rightArrow" width="13" height="9"/>
         <image name="sunrise" width="13" height="11"/>
         <image name="sunset" width="13" height="11"/>

@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 struct Weather: Codable {
+    var currentLocation: Bool?
     var name: String
     let sys: SunInformations
     let coord: Coordinates

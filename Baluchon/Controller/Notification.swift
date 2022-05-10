@@ -14,6 +14,7 @@ extension Notification {
         case updateWeather
         case cityAlreadyAdded = "The city you entered is already in the list!"
         case cityDoesntExist = "The city you entered doesn't exist!"
+        case cannotGetCurrentLocation = "Your current location cannot be found!"
         
         var notificationName: Notification.Name {
             return Notification.Name(rawValue: "\(self)")

@@ -17,6 +17,7 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var sunriseLabel: UILabel!
     @IBOutlet weak var sunsetLabel: UILabel!
     @IBOutlet weak var weatherConditionLabel: UILabel!
+    @IBOutlet weak var isCurrentLocationImage: UIImageView!
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -30,6 +31,12 @@ class CollectionViewCell: UICollectionViewCell {
             weatherConditionView.image = UIImage(data: data)
         }
 
+        if let currentLocation = weather.currentLocation, currentLocation {
+            isCurrentLocationImage.isHidden = false
+        } else {
+            isCurrentLocationImage.isHidden = true
+        }
+        
         weatherConditionLabel.text = weather.weather[0].description
         cityLabel.text = "\(weather.name), \(weather.sys.country)"
         temperatureLabel.text = "\(weather.main.temp) °C"
