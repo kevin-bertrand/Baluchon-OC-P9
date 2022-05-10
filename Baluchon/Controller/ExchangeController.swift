@@ -29,7 +29,7 @@ class ExchangeController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(_updateExchangeRate), name: Notification.BaluchonNotification.updateExchangeRate.notificationName, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(_showAlertViewFor), name: Notification.BaluchonNotification.errorDuringDownloadRates.notificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(_showAlertView), name: Notification.BaluchonNotification.errorDuringDownloadRates.notificationName, object: nil)
         
         _addTapGestureRecogniser(to: targetCurrencyLabel, perform: #selector(_displayPicker))
         _addTapGestureRecogniser(to: startCurrencyLabel, perform: #selector(_displayPicker))
@@ -168,7 +168,7 @@ class ExchangeController: UIViewController {
     }
     
     /// Getting alert and show an UIAlert
-    @objc private func _showAlertViewFor() {
+    @objc private func _showAlertView() {
         let alert = UIAlertController(title: "Error", message: Notification.BaluchonNotification.errorDuringDownloadRates.notificationMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true)
