@@ -20,12 +20,12 @@ class TranslateController: UIViewController, UITextViewDelegate {
         textToTranslateView.delegate = self
         
         // Configure notification reception to update translated text view
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTranslation), name: Notification.BaluchonNotification.updateTranslation.notificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(_updateTranslation), name: Notification.BaluchonNotification.updateTranslation.notificationName, object: nil)
     }
     
     // MARK: Actions
     @IBAction func translateButtonTouched() {
-        translation.performTranlation(of: textToTranslateView.text)
+        _translation.performTranlation(of: textToTranslateView.text)
     }
     
     // MARK: Methods
@@ -40,13 +40,13 @@ class TranslateController: UIViewController, UITextViewDelegate {
     
     // MARK: Private
     // MARK: Properties
-    private let translation = Translation()
+    private let _translation = TranslationManager()
     
     // MARK: Methods
     /// Update the display when a notification is received
-    @objc private func updateTranslation() {
+    @objc private func _updateTranslation() {
         DispatchQueue.main.async {
-            self.translatedTextView.text = self.translation.translatedText
+            self.translatedTextView.text = self._translation.translatedText
         }
     }
 }
