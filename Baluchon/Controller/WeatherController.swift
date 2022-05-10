@@ -5,6 +5,7 @@
 //  Created by Kevin Bertrand on 25/04/2022.
 //
 
+import Foundation
 import UIKit
 
 class WeatherController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
@@ -50,7 +51,12 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
     
     // MARK: Actions
     @IBAction func addCityButtonTouched() {
-        weather.getTemperatureOf(city: newCityField.text ?? "")
+        if var newCity = newCityField.text {
+            newCity = newCity.replacingOccurrences(of: " ", with: "-")
+            newCity = newCity.folding(options: .diacriticInsensitive, locale: nil)
+            print(newCity)
+            weather.getTemperatureOf(city: newCity)
+        }
     }
     
     // MARK: Private
