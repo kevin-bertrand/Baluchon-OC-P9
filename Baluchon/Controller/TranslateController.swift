@@ -19,14 +19,20 @@ class TranslateController: UIViewController {
     // MARK: Initialisation function
     override func viewDidLoad() {
         super.viewDidLoad()
-        _containerView = UIView()
-        _currencyPicker = UIPickerView()
+        _sourceLanguagePickerContainer = UIView()
+        _targetLanguagePickerContainer = UIView()
+        _sourceLanguagePicker = UIPickerView()
+        _targetLanguagePicker = UIPickerView()
         _delegateSetup()
         
         // Configure notification reception to update translated text view
         NotificationCenter.default.addObserver(self, selector: #selector(_updateTranslation), name: Notification.BaluchonNotification.updateTranslation.notificationName, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(_showAlertView), name: Notification.BaluchonNotification.errorDuringTranslating.notificationName, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(_showAlertView), name: Notification.BaluchonNotification.cannotDetectLanguage.notificationName, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(_autoDetectionCompleted), name: Notification.BaluchonNotification.updateSourceLanguage.notificationName, object: nil)
         
         _addTapGestureRecogniser(to: sourceLanguageLabel, perform: #selector(displayPicker))
         _addTapGestureRecogniser(to: targetLanguageLabel, perform: #selector(displayPicker))
@@ -51,8 +57,10 @@ class TranslateController: UIViewController {
     // MARK: Private
     // MARK: Properties
     private let _translation = TranslationManager()
-    private var _currencyPicker: UIPickerView!
-    private var _containerView: UIView!
+    private var _sourceLanguagePicker: UIPickerView!
+    private var _targetLanguagePicker: UIPickerView!
+    private var _sourceLanguagePickerContainer: UIView!
+    private var _targetLanguagePickerContainer: UIView!
     private var _selectedPicker: Int = 0
     
     // MARK: Methods
@@ -75,19 +83,26 @@ class TranslateController: UIViewController {
     
     /// Configure picker
     private func _configurePicker(height: Double) {
-        _currencyPicker.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: height)
-        _currencyPicker.backgroundColor = .init(named: "defaultBackground")
-        _configurePickerContainer(heigh: height)
+        _configurePickerView(_sourceLanguagePicker, height: height)
+        _configurePickerView(_targetLanguagePicker, height: height)
+        _configurePickerContainer(_sourceLanguagePickerContainer, for: _sourceLanguagePicker, heigh: height)
+        _configurePickerContainer(_targetLanguagePickerContainer, for: _targetLanguagePicker, heigh: height)
+    }
+    
+    /// Configure picker view
+    private func _configurePickerView(_ picker: UIPickerView, height: Double) {
+        picker.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: height)
+        picker.backgroundColor = .init(named: "defaultBackground")
     }
     
     /// Configure the picker container
-    private func _configurePickerContainer(heigh: Double) {
+    private func _configurePickerContainer(_ container: UIView, for picker: UIPickerView, heigh: Double) {
         // Set up the picker container
-        _containerView.frame = CGRect(x: 0, y: self.view.bounds.height, width: view.bounds.width, height: heigh)
+        container.frame = CGRect(x: 0, y: self.view.bounds.height, width: view.bounds.width, height: heigh)
         
-        _containerView.addSubview(_currencyPicker)
-        _containerView.addSubview(_configurePickerToolbar())
-        view.addSubview(_containerView)
+        container.addSubview(picker)
+        container.addSubview(_configurePickerToolbar())
+        view.addSubview(container)
     }
     
     /// Configure the toolbar with the "done" button for the picker
@@ -102,10 +117,18 @@ class TranslateController: UIViewController {
         view.endEditing(true)
     }
     
+    /// Get row id of the auto-detected language when the notification is received
+    @objc private func _autoDetectionCompleted() {
+        if let index = _translation.supportedSourceLanguages.firstIndex(where: {$0.language == _translation.sourceLanguage}) {
+            pickerView(_sourceLanguagePicker, didSelectRow: index, inComponent: 0)
+        }
+    }
+    
     /// Dismiss the picker
     @objc private func _dismissPicker() {
         UIView.animate(withDuration: 0.2) {
-            self._containerView.frame.origin.y = self.view.frame.height
+            self._targetLanguagePickerContainer.frame.origin.y = self.view.frame.height
+            self._sourceLanguagePickerContainer.frame.origin.y = self.view.frame.height
         }
     }
     
@@ -119,7 +142,11 @@ class TranslateController: UIViewController {
         
         // Animation
         UIView.animate(withDuration: 0.2) {
-            self._containerView.frame.origin.y = (self.view.frame.height - pickerViewHeight - (self.tabBarController?.tabBar.frame.size.height ?? 0)/2)
+            if selectedPickerTag == 1 {
+                self._sourceLanguagePickerContainer.frame.origin.y = (self.view.frame.height - pickerViewHeight - (self.tabBarController?.tabBar.frame.size.height ?? 0)/2)
+            } else if selectedPickerTag == 2 {
+                self._targetLanguagePickerContainer.frame.origin.y = (self.view.frame.height - pickerViewHeight - (self.tabBarController?.tabBar.frame.size.height ?? 0)/2)
+            }
         }
     }
     
@@ -131,10 +158,22 @@ class TranslateController: UIViewController {
     }
     
     /// Getting alert and show an UIAlert
-    @objc private func _showAlertView() {
-        let alert = UIAlertController(title: "Error", message: Notification.BaluchonNotification.errorDuringTranslating.notificationMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(alert, animated: true)
+    @objc private func _showAlertView(_ notification: Notification) {
+        var message = "An unkown error occurs!"
+        
+        if let notificationName = notification.userInfo?["name"] as? Notification.Name {
+            if notificationName == Notification.BaluchonNotification.errorDuringTranslating.notificationName {
+                message = Notification.BaluchonNotification.errorDuringTranslating.notificationMessage
+            } else if notificationName == Notification.BaluchonNotification.cannotDetectLanguage.notificationName {
+                message = Notification.BaluchonNotification.cannotDetectLanguage.notificationMessage
+            }
+        }
+        
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
+        }
     }
 }
 
@@ -143,22 +182,24 @@ extension TranslateController: UIPickerViewDelegate, UITextViewDelegate {
     // MARK: Public method
     /// Called when an item is selected
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch _selectedPicker {
-        case 1:
-            _translation.sourceLanguage = _translation.supportedLanguages[row].language
-            sourceLanguageLabel.text = "▼ \(_translation.supportedLanguages[row].name)"
-        case 2:
-            _translation.targetLanguage = _translation.supportedLanguages[row].language
-            targetLanguageLabel.text = "\(_translation.supportedLanguages[row].name) ▼"
-        default:
-            break
+        DispatchQueue.main.async {
+            if pickerView == self._sourceLanguagePicker {
+                let language = self._translation.supportedSourceLanguages[row]
+                self.sourceLanguageLabel.text = "▼ \(language.name)"
+                self._translation.sourceLanguage = language.language
+            } else if pickerView == self._targetLanguagePicker {
+                let language = self._translation.supportedTargetLanguages[row]
+                self._translation.targetLanguage = language.language
+                self.targetLanguageLabel.text = "\(language.name) ▼"
+            }
         }
     }
     
     // MARK: Private method
     /// Setup delegates for this controller
     private func _delegateSetup() {
-        _currencyPicker.delegate = self
+        _sourceLanguagePicker.delegate = self
+        _targetLanguagePicker.delegate = self
         textToTranslateView.delegate = self
     }
 }
@@ -173,12 +214,22 @@ extension TranslateController: UIPickerViewDataSource {
     
     /// Return a cell of the picker. Called once per item
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(_translation.supportedLanguages[row].name)"
+        if pickerView == _targetLanguagePicker {
+            return "\(_translation.supportedTargetLanguages[row].name)"
+        } else if pickerView == _sourceLanguagePicker {
+            return "\(_translation.supportedSourceLanguages[row].name)"
+        }
+        return nil
     }
     
     /// Return the number of items in the picker
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return _translation.supportedLanguages.count
+        if pickerView == _targetLanguagePicker {
+            return _translation.supportedTargetLanguages.count
+        } else if pickerView == _sourceLanguagePicker {
+            return _translation.supportedSourceLanguages.count
+        }
+        return 0
     }
     
     // MARK: Private method

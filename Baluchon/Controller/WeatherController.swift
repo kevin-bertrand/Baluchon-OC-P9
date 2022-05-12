@@ -114,8 +114,10 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
     
     /// Show alert view
     private func _showAlertViewFor(notification: Notification.BaluchonNotification) {
-        let alert = UIAlertController(title: "Error", message: notification.notificationMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(alert, animated: true)
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Error", message: notification.notificationMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
+        }
     }
 }

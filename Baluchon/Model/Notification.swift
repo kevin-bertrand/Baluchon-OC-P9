@@ -16,6 +16,8 @@ extension Notification {
         // Translation notifications
         case updateTranslation
         case errorDuringTranslating = "An error occurs during the translation. Please try again!"
+        case updateSourceLanguage
+        case cannotDetectLanguage = "An error occurs during detecting the language. Verify your connection and your text!"
         
         // Weather notifications
         case updateWeather

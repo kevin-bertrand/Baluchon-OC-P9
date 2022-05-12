@@ -55,7 +55,7 @@ class ExchangeManager {
     
     // MARK: Private
     // MARK: Properties
-    private let _apiKey = "d266eca0a81e01912c00972d3c550bc1"
+    private let _apiKey = "WN4uESIbGoy1Dj0Y32GE8ol1EEXtSeBT"
     private let _rateUrl = "http://data.fixer.io/api/latest?"
     private let _symbolsUrl = "http://data.fixer.io/api/symbols?"
     private var _rates: [Exchange] = []

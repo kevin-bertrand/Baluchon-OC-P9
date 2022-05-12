@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 class ExchangeController: UIViewController {
     // MARK: Public
@@ -169,9 +170,11 @@ class ExchangeController: UIViewController {
     
     /// Getting alert and show an UIAlert
     @objc private func _showAlertView() {
-        let alert = UIAlertController(title: "Error", message: Notification.BaluchonNotification.errorDuringDownloadRates.notificationMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(alert, animated: true)
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Error", message: Notification.BaluchonNotification.errorDuringDownloadRates.notificationMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
+        }
     }
 }
 
