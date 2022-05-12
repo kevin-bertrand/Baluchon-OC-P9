@@ -17,7 +17,7 @@ class ExchangeManager {
     // MARK: Methods
     /// Get current rates
     func getRates() {
-        let urlParams: [String: String] = ["access_key": _apiKey]
+        let urlParams: [String: String] = ["base": "EUR", "apikey": _apiKey]
         NetworkManager.shared.performApiRequest(for: _rateUrl, urlParams: urlParams, httpMethod: .get) { data in
             if let data = data,
                let exchangeData = try? JSONDecoder().decode(ExchangeData.self, from: data) {
@@ -56,14 +56,14 @@ class ExchangeManager {
     // MARK: Private
     // MARK: Properties
     private let _apiKey = "WN4uESIbGoy1Dj0Y32GE8ol1EEXtSeBT"
-    private let _rateUrl = "http://data.fixer.io/api/latest?"
-    private let _symbolsUrl = "http://data.fixer.io/api/symbols?"
+    private let _rateUrl = "https://api.apilayer.com/fixer/latest?"
+    private let _symbolsUrl = "https://api.apilayer.com/fixer/symbols?"
     private var _rates: [Exchange] = []
     
     // MARK: Methods
     /// Gettings currency symbols
     private func _getSymbols(completionHandler: @escaping ((Data?) -> Void)) {
-        let urlParams: [String: String] = ["access_key": _apiKey]
+        let urlParams: [String: String] = ["apikey": _apiKey]
         NetworkManager.shared.performApiRequest(for: _symbolsUrl, urlParams: urlParams, httpMethod: .get) { data in
             completionHandler(data)
         }

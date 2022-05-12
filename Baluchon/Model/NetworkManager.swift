@@ -25,7 +25,7 @@ class NetworkManager {
             request.httpBody = formatBody(body)
         }
         let session = URLSession(configuration: .default)
-        
+        print(request)
         let task = session.dataTask(with: request) { data, response, error in
             if let response = response as? HTTPURLResponse,
                response.statusCode == 200 || response.statusCode == 201 {
