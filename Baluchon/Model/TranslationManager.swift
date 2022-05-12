@@ -38,6 +38,7 @@ class TranslationManager {
                 self._supportedTargetLanguages = supportedLanguages.data.languages
                 self._supportedSourceLanguages = self._supportedTargetLanguages
                 self._supportedSourceLanguages.insert(Language(language: "auto", name: "Auto-detection"), at: 0)
+                NotificationManager.shared.sendFor(.supportedLanguagesDowloaded)
             }
         }
     }

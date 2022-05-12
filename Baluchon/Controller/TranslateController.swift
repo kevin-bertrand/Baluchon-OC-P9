@@ -34,6 +34,8 @@ class TranslateController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(_autoDetectionCompleted), name: Notification.BaluchonNotification.updateSourceLanguage.notificationName, object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(_updatePickerWithSupportedLanguages), name: Notification.BaluchonNotification.supportedLanguagesDowloaded.notificationName, object: nil)
+        
         _addTapGestureRecogniser(to: sourceLanguageLabel, perform: #selector(displayPicker))
         _addTapGestureRecogniser(to: targetLanguageLabel, perform: #selector(displayPicker))
         _translation.getSupportedLanguages()
@@ -173,6 +175,22 @@ class TranslateController: UIViewController {
             let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             self.present(alert, animated: true)
+        }
+    }
+    
+    /// Update picker after getting supported languages
+    @objc private func _updatePickerWithSupportedLanguages() {
+        DispatchQueue.main.async {
+            self._sourceLanguagePicker.reloadAllComponents()
+            self._targetLanguagePicker.reloadAllComponents()
+            
+            if let sourceIndex = self._translation.supportedSourceLanguages.firstIndex(where: {$0.language == self._translation.sourceLanguage}) {
+                self._sourceLanguagePicker.selectRow(sourceIndex, inComponent: 0, animated: false)
+            }
+            
+            if let targetIndex = self._translation.supportedTargetLanguages.firstIndex(where: {$0.language == self._translation.targetLanguage}) {
+                self._targetLanguagePicker.selectRow(targetIndex, inComponent: 0, animated: false)
+            }
         }
     }
 }
