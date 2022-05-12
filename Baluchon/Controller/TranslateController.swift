@@ -56,6 +56,11 @@ class TranslateController: UIViewController {
         }
     }
     
+    /// Function called when the text view is being edited
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        _dismissPicker()
+    }
+    
     // MARK: Private
     // MARK: Properties
     private let _translation = TranslationManager()

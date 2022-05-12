@@ -65,6 +65,11 @@ class ExchangeController: UIViewController {
         return exchangeCell
     }
     
+    /// Function called when the text field being edited
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        _dismissPicker()
+    }
+    
     // MARK: Private
     // MARK: Properties
     private let _exchangeRate = ExchangeManager()
@@ -179,7 +184,7 @@ class ExchangeController: UIViewController {
 }
 
 // MARK: Delegate extension
-extension ExchangeController: UIPickerViewDelegate, UITableViewDelegate {
+extension ExchangeController: UIPickerViewDelegate, UITableViewDelegate, UITextFieldDelegate {
     // MARK: Public method
     /// Called when an item is selected
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -202,6 +207,7 @@ extension ExchangeController: UIPickerViewDelegate, UITableViewDelegate {
     private func _delegateSetup() {
         tableView.delegate = self
         _currencyPicker.delegate = self
+        moneyToExchangeField.delegate = self
     }
 }
 
