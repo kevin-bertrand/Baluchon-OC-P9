@@ -213,7 +213,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="q7h-kv-ABn">
                                 <rect key="frame" x="20" y="111" width="388" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="French" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBX-oy-UUl">
+                                    <label opaque="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="▼ French" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eBX-oy-UUl">
                                         <rect key="frame" x="0.0" y="0.0" width="164.66666666666666" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="QoF-YQ-DZR"/>
@@ -229,7 +229,7 @@
                                             <constraint firstAttribute="width" secondItem="hak-lm-uHR" secondAttribute="height" multiplier="1:1.5" id="1vy-11-5Jb"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSl-GV-eRY">
+                                    <label opaque="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English ▼" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BSl-GV-eRY">
                                         <rect key="frame" x="223.33333333333337" y="0.0" width="164.66666666666663" height="40"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <nil key="textColor"/>
@@ -322,6 +322,8 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="placeholderLabel" destination="FZ9-Yp-5w9" id="9Md-Kl-39C"/>
+                        <outlet property="sourceLanguageLabel" destination="eBX-oy-UUl" id="GYc-ag-sO8"/>
+                        <outlet property="targetLanguageLabel" destination="BSl-GV-eRY" id="sZS-Y6-bJE"/>
                         <outlet property="textToTranslateView" destination="Tx5-hX-J4C" id="apI-cW-cH6"/>
                         <outlet property="translatedTextView" destination="EMw-qQ-QQu" id="Ajq-6x-frG"/>
                     </connections>

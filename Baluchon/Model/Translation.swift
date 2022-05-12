@@ -35,3 +35,16 @@ enum Translation {
         }
     }
 }
+
+struct SupportedLanguagesData: Codable {
+    let data: SupportedLanguages
+}
+
+struct SupportedLanguages: Codable {
+    let languages: [Language]
+}
+
+struct Language: Codable {
+    let language: String
+    let name: String
+}
