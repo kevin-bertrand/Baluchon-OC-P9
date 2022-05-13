@@ -32,7 +32,7 @@ class TranslationManager {
     /// Download supported languaages 
     func getSupportedLanguages() {
         let urlParams = ["key": _apiKey]
-        NetworkManager.shared.performApiRequest(for: Translation.supportedLanguages.getURL(), urlParams: urlParams, httpMethod: .post, body: ["target": "en"]) { data in
+        NetworkManager.shared.performApiRequest(for: Translation.supportedLanguages.getURL(), urlParams: urlParams, httpMethod: Translation.supportedLanguages.getHTTPMethod(), body: ["target": "en"]) { data in
             if let data = data,
                let supportedLanguages = try? JSONDecoder().decode(SupportedLanguagesData.self, from: data){
                 self._supportedTargetLanguages = supportedLanguages.data.languages
@@ -61,7 +61,7 @@ class TranslationManager {
                         NotificationManager.shared.sendFor(.updateTranslation)
                     }
                 } catch {
-                    print(error.localizedDescription)
+                    NotificationManager.shared.sendFor(.errorDuringTranslating)
                 }
             } else {
                 NotificationManager.shared.sendFor(.errorDuringTranslating)

@@ -44,18 +44,20 @@ class ExchangeManager {
     
     /// Convert a given value and round to the desired currency as a string
     func convertValue(_ value: Double) -> String {
+        var convertValue = ""
+        
         if let rateToEuro = _rates.first(where: {$0.currency == startLanguage}),
             let endRate = _rates.first(where: { $0.currency == exchangedCurrency }) {
             let exchangedValue = (value / rateToEuro.value) * endRate.value
-            return String(format: "%.3f", exchangedValue)
-        } else {
-            return ""
+            convertValue = String(format: "%.3f", exchangedValue)
         }
+        
+        return convertValue
     }
     
     // MARK: Private
     // MARK: Properties
-    private let _apiKey = "WN4uESIbGoy1Dj0Y32GE8ol1EEXtSeBT"
+    private let _apiKey = "MqnRDEmKUmziyC1KPeo7nWnF8dZXtWJQ"
     private let _rateUrl = "https://api.apilayer.com/fixer/latest?"
     private let _symbolsUrl = "https://api.apilayer.com/fixer/symbols?"
     private var _rates: [Exchange] = []

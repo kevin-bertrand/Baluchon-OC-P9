@@ -28,11 +28,7 @@ enum Translation {
     }
     
     func getHTTPMethod() -> HttpMethod {
-        if self == .supportedLanguages {
-            return .get
-        } else {
-            return .post
-        }
+        return .post
     }
 }
 

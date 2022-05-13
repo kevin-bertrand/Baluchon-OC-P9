@@ -85,13 +85,13 @@ class WeatherManager {
     
     /// Checking if the entered city is already in shown
     private func _checkIfCityIsAlreadyShown(_ cityName: String?) -> Bool {
+        var cityAlreadyShown: Bool = false
         if let cityName = cityName,
            self._weathers.contains(where: { $0.name == cityName}) {
             NotificationManager.shared.sendFor(.cityAlreadyAdded)
-            return true
-        } else {
-            return false
+            cityAlreadyShown = true
         }
+        return cityAlreadyShown
     }
     
     /// Getting the icon of the current weather condition
