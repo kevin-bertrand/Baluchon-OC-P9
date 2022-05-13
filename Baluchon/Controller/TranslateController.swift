@@ -15,10 +15,13 @@ class TranslateController: UIViewController {
     @IBOutlet weak var placeholderLabel: UILabel!
     @IBOutlet weak var sourceLanguageLabel: UILabel!
     @IBOutlet weak var targetLanguageLabel: UILabel!
+    @IBOutlet weak var downloadInProgressView: UIView!
+    @IBOutlet weak var downlaodInProgressMessageLabel: UILabel!
     
     // MARK: Initialisation function
     override func viewDidLoad() {
         super.viewDidLoad()
+        downloadInProgressView.isHidden = false
         _sourceLanguagePickerContainer = UIView()
         _targetLanguagePickerContainer = UIView()
         _sourceLanguagePicker = UIPickerView()
@@ -177,6 +180,7 @@ class TranslateController: UIViewController {
         }
         
         DispatchQueue.main.async {
+            self.downloadInProgressView.isHidden = true
             let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             self.present(alert, animated: true)
@@ -186,6 +190,7 @@ class TranslateController: UIViewController {
     /// Update picker after getting supported languages
     @objc private func _updatePickerWithSupportedLanguages() {
         DispatchQueue.main.async {
+            self.downloadInProgressView.isHidden = true
             self._sourceLanguagePicker.reloadAllComponents()
             self._targetLanguagePicker.reloadAllComponents()
             

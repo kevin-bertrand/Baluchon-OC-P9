@@ -16,10 +16,12 @@ class ExchangeController: UIViewController {
     @IBOutlet weak var exchangedMoneyField: UITextField!
     @IBOutlet weak var targetCurrencyLabel: UILabel!
     @IBOutlet weak var startCurrencyLabel: UILabel!
+    @IBOutlet weak var dowloadInProgressView: UIView!
     
     // MARK: Initialisation function
     override func viewDidLoad() {
         super.viewDidLoad()
+        dowloadInProgressView.isHidden = false
         _containerView = UIView()
         _currencyPicker = UIPickerView()
         
@@ -138,6 +140,7 @@ class ExchangeController: UIViewController {
     /// Update rates when receive notification
     @objc private func _updateExchangeRate() {
         DispatchQueue.main.async {
+            self.dowloadInProgressView.isHidden = true
             self.tableView.reloadData()
         }
     }
@@ -176,6 +179,7 @@ class ExchangeController: UIViewController {
     /// Getting alert and show an UIAlert
     @objc private func _showAlertView() {
         DispatchQueue.main.async {
+            self.dowloadInProgressView.isHidden = true
             let alert = UIAlertController(title: "Error", message: Notification.BaluchonNotification.errorDuringDownloadRates.notificationMessage, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             self.present(alert, animated: true)

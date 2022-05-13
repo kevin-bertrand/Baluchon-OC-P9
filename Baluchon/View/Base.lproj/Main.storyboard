@@ -143,6 +143,44 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oba-ju-gXW" userLabel="Download In progress view">
+                                <rect key="frame" x="0.0" y="44" width="428" height="799"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="JkG-Pj-FNu">
+                                        <rect key="frame" x="194" y="379.66666666666669" width="40" height="40"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="sQB-rx-ZPT"/>
+                                            <constraint firstAttribute="width" constant="40" id="sho-Vh-LHc"/>
+                                        </constraints>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Download in progress..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OBQ-tr-lbo">
+                                        <rect key="frame" x="0.0" y="429.66666666666669" width="428" height="30"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIa-qW-zFK">
+                                        <rect key="frame" x="0.0" y="469.66666666666663" width="428" height="30"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="EIa-qW-zFK" firstAttribute="top" secondItem="OBQ-tr-lbo" secondAttribute="bottom" constant="10" id="0ck-lN-8TU"/>
+                                    <constraint firstItem="JkG-Pj-FNu" firstAttribute="centerY" secondItem="oba-ju-gXW" secondAttribute="centerY" id="2Q8-0W-uBY"/>
+                                    <constraint firstItem="OBQ-tr-lbo" firstAttribute="leading" secondItem="oba-ju-gXW" secondAttribute="leading" id="Lco-8x-Uqq"/>
+                                    <constraint firstItem="OBQ-tr-lbo" firstAttribute="top" secondItem="JkG-Pj-FNu" secondAttribute="bottom" constant="10" id="Vxw-rY-WMZ"/>
+                                    <constraint firstItem="OBQ-tr-lbo" firstAttribute="centerX" secondItem="oba-ju-gXW" secondAttribute="centerX" id="bNZ-KU-7Il"/>
+                                    <constraint firstItem="JkG-Pj-FNu" firstAttribute="centerX" secondItem="oba-ju-gXW" secondAttribute="centerX" id="lYS-xg-AnA"/>
+                                    <constraint firstItem="EIa-qW-zFK" firstAttribute="leading" secondItem="oba-ju-gXW" secondAttribute="leading" id="sBs-Wm-X3Y"/>
+                                    <constraint firstItem="EIa-qW-zFK" firstAttribute="centerX" secondItem="oba-ju-gXW" secondAttribute="centerX" id="w78-lG-BgJ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JFA-JD-dez"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -153,12 +191,16 @@
                             <constraint firstItem="4K5-Mf-aM1" firstAttribute="top" secondItem="au1-qY-6SX" secondAttribute="bottom" constant="20" id="GMh-7q-87A"/>
                             <constraint firstItem="au1-qY-6SX" firstAttribute="top" secondItem="E0X-8d-BEm" secondAttribute="bottom" constant="25" id="Ixj-Xc-9To"/>
                             <constraint firstItem="E0X-8d-BEm" firstAttribute="top" secondItem="JFA-JD-dez" secondAttribute="top" constant="15" id="KP0-5t-Rby"/>
+                            <constraint firstItem="oba-ju-gXW" firstAttribute="top" secondItem="JFA-JD-dez" secondAttribute="top" id="MdI-fL-4kJ"/>
                             <constraint firstItem="1Sq-sf-fVg" firstAttribute="leading" secondItem="JFA-JD-dez" secondAttribute="leading" constant="20" id="NU9-dn-lFb"/>
                             <constraint firstItem="LoZ-NF-JJE" firstAttribute="top" secondItem="1Sq-sf-fVg" secondAttribute="bottom" constant="20" id="PO6-aj-AkZ"/>
+                            <constraint firstItem="oba-ju-gXW" firstAttribute="trailing" secondItem="JFA-JD-dez" secondAttribute="trailing" id="QHy-dA-Xdt"/>
                             <constraint firstItem="JFA-JD-dez" firstAttribute="trailing" secondItem="LoZ-NF-JJE" secondAttribute="trailing" constant="20" id="ZAU-84-OBC"/>
+                            <constraint firstItem="oba-ju-gXW" firstAttribute="leading" secondItem="JFA-JD-dez" secondAttribute="leading" id="Zp3-lc-2gy"/>
                             <constraint firstItem="JFA-JD-dez" firstAttribute="trailing" secondItem="1Sq-sf-fVg" secondAttribute="trailing" constant="20" id="aJx-N2-f7m"/>
                             <constraint firstItem="JFA-JD-dez" firstAttribute="trailing" secondItem="E0X-8d-BEm" secondAttribute="trailing" constant="20" id="b5p-zd-8WU"/>
                             <constraint firstItem="JFA-JD-dez" firstAttribute="trailing" secondItem="au1-qY-6SX" secondAttribute="trailing" constant="20" id="cWC-sO-iPc"/>
+                            <constraint firstItem="oba-ju-gXW" firstAttribute="bottom" secondItem="JFA-JD-dez" secondAttribute="bottom" id="cWv-6N-g8q"/>
                             <constraint firstItem="1Sq-sf-fVg" firstAttribute="top" secondItem="4K5-Mf-aM1" secondAttribute="bottom" constant="25" id="crq-Eu-gFG"/>
                             <constraint firstItem="JFA-JD-dez" firstAttribute="trailing" secondItem="Rf1-nd-iDF" secondAttribute="trailing" constant="20" id="d0g-dX-7kL"/>
                             <constraint firstItem="Rf1-nd-iDF" firstAttribute="leading" secondItem="JFA-JD-dez" secondAttribute="leading" constant="20" id="dgt-OP-a04"/>
@@ -172,6 +214,7 @@
                         <imageReference key="image" image="exchange" symbolScale="large"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="dowloadInProgressView" destination="oba-ju-gXW" id="5jS-dl-SIS"/>
                         <outlet property="exchangedMoneyField" destination="dtM-cQ-Z8V" id="MV2-XR-ohx"/>
                         <outlet property="moneyToExchangeField" destination="Idu-SX-k8g" id="joU-In-Xvs"/>
                         <outlet property="startCurrencyLabel" destination="Hz6-x5-AEt" id="LAE-gi-eMk"/>
@@ -294,6 +337,44 @@
                                 <color key="textColor" systemColor="tertiaryLabelColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view opaque="NO" alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jiv-yF-nQb" userLabel="Download In progress view">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="843"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="czw-nz-l1O">
+                                        <rect key="frame" x="194" y="401.66666666666669" width="40" height="40"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="ru1-Zc-yWc"/>
+                                            <constraint firstAttribute="height" constant="40" id="yR6-Io-E9l"/>
+                                        </constraints>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Download in progress..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xH0-1k-cHT">
+                                        <rect key="frame" x="0.0" y="451.66666666666669" width="428" height="30"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nFS-US-K34">
+                                        <rect key="frame" x="0.0" y="491.66666666666669" width="428" height="30.000000000000057"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="czw-nz-l1O" firstAttribute="centerY" secondItem="Jiv-yF-nQb" secondAttribute="centerY" id="Lb5-Id-2KJ"/>
+                                    <constraint firstItem="czw-nz-l1O" firstAttribute="centerX" secondItem="Jiv-yF-nQb" secondAttribute="centerX" id="Ot2-I4-PWG"/>
+                                    <constraint firstItem="xH0-1k-cHT" firstAttribute="centerX" secondItem="Jiv-yF-nQb" secondAttribute="centerX" id="aen-JS-d0g"/>
+                                    <constraint firstItem="xH0-1k-cHT" firstAttribute="leading" secondItem="Jiv-yF-nQb" secondAttribute="leading" id="cID-xe-edU"/>
+                                    <constraint firstItem="xH0-1k-cHT" firstAttribute="top" secondItem="czw-nz-l1O" secondAttribute="bottom" constant="10" id="cN9-85-dzu"/>
+                                    <constraint firstItem="nFS-US-K34" firstAttribute="centerX" secondItem="Jiv-yF-nQb" secondAttribute="centerX" id="gc4-CE-4Gw"/>
+                                    <constraint firstItem="nFS-US-K34" firstAttribute="leading" secondItem="Jiv-yF-nQb" secondAttribute="leading" id="i0k-0G-AmC"/>
+                                    <constraint firstItem="nFS-US-K34" firstAttribute="top" secondItem="xH0-1k-cHT" secondAttribute="bottom" constant="10" id="piA-8k-2MQ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KoH-zh-OZb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -304,7 +385,9 @@
                             <constraint firstItem="CIt-gG-Dsx" firstAttribute="leading" secondItem="KoH-zh-OZb" secondAttribute="leading" constant="20" id="BsF-oU-77v"/>
                             <constraint firstItem="uNs-ZN-YJe" firstAttribute="top" secondItem="q7h-kv-ABn" secondAttribute="bottom" constant="25" id="Dco-9p-ueL"/>
                             <constraint firstItem="KoH-zh-OZb" firstAttribute="trailing" secondItem="q7h-kv-ABn" secondAttribute="trailing" constant="20" id="Mri-ju-6S9"/>
+                            <constraint firstItem="Jiv-yF-nQb" firstAttribute="leading" secondItem="U9B-9n-94a" secondAttribute="leading" id="SHt-5n-GdZ"/>
                             <constraint firstItem="KoH-zh-OZb" firstAttribute="trailing" secondItem="CIt-gG-Dsx" secondAttribute="trailing" constant="20" id="TFe-sz-9kh"/>
+                            <constraint firstItem="KoH-zh-OZb" firstAttribute="trailing" secondItem="Jiv-yF-nQb" secondAttribute="trailing" id="UIz-De-rk5"/>
                             <constraint firstItem="q7h-kv-ABn" firstAttribute="top" secondItem="CIt-gG-Dsx" secondAttribute="bottom" constant="15" id="WZp-jQ-ng6"/>
                             <constraint firstItem="Qqi-uR-VPi" firstAttribute="leading" secondItem="KoH-zh-OZb" secondAttribute="leading" constant="40" id="cXs-UR-MjU"/>
                             <constraint firstItem="CIt-gG-Dsx" firstAttribute="top" secondItem="KoH-zh-OZb" secondAttribute="top" constant="15" id="gU5-2u-eH8"/>
@@ -312,7 +395,9 @@
                             <constraint firstItem="KoH-zh-OZb" firstAttribute="trailing" secondItem="FZ9-Yp-5w9" secondAttribute="trailing" constant="20" id="mGb-gY-Tap"/>
                             <constraint firstItem="FZ9-Yp-5w9" firstAttribute="leading" secondItem="Tx5-hX-J4C" secondAttribute="leading" constant="16" id="o3I-zp-QpH"/>
                             <constraint firstItem="uNs-ZN-YJe" firstAttribute="leading" secondItem="KoH-zh-OZb" secondAttribute="leading" constant="20" id="ofr-eJ-h4Y"/>
+                            <constraint firstItem="Jiv-yF-nQb" firstAttribute="top" secondItem="U9B-9n-94a" secondAttribute="top" id="si7-Bw-FV5"/>
                             <constraint firstItem="Qqi-uR-VPi" firstAttribute="top" secondItem="uNs-ZN-YJe" secondAttribute="bottom" constant="15" id="uQO-1K-Sbb"/>
+                            <constraint firstItem="KoH-zh-OZb" firstAttribute="bottom" secondItem="Jiv-yF-nQb" secondAttribute="bottom" id="wRQ-o9-9pF"/>
                             <constraint firstItem="KoH-zh-OZb" firstAttribute="bottom" secondItem="Qqi-uR-VPi" secondAttribute="bottom" constant="10" id="yEz-w9-Z9J"/>
                         </constraints>
                     </view>
@@ -321,6 +406,8 @@
                         <inset key="largeContentSizeImageInsets" minX="0.0" minY="-5" maxX="0.0" maxY="0.0"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="downlaodInProgressMessageLabel" destination="xH0-1k-cHT" id="Deg-2D-bTu"/>
+                        <outlet property="downloadInProgressView" destination="Jiv-yF-nQb" id="G64-bw-Sx0"/>
                         <outlet property="placeholderLabel" destination="FZ9-Yp-5w9" id="9Md-Kl-39C"/>
                         <outlet property="sourceLanguageLabel" destination="eBX-oy-UUl" id="GYc-ag-sO8"/>
                         <outlet property="targetLanguageLabel" destination="BSl-GV-eRY" id="sZS-Y6-bJE"/>
