@@ -21,6 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="AccentColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="uc9-UE-gHn" kind="relationship" relationship="viewControllers" id="iYF-QU-bpP"/>
@@ -43,7 +44,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="E0X-8d-BEm" userLabel="Title">
                                 <rect key="frame" x="20" y="59" width="388" height="37"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="exchange" translatesAutoresizingMaskIntoConstraints="NO" id="a3s-Hw-OIN">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="exchange-icon" translatesAutoresizingMaskIntoConstraints="NO" id="a3s-Hw-OIN">
                                         <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>
                                         <color key="tintColor" name="AccentColor"/>
                                         <constraints>
@@ -146,7 +147,7 @@
                             <view opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oba-ju-gXW" userLabel="Download In progress view">
                                 <rect key="frame" x="0.0" y="44" width="428" height="799"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="JkG-Pj-FNu">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="JkG-Pj-FNu">
                                         <rect key="frame" x="194" y="379.66666666666669" width="40" height="40"/>
                                         <color key="tintColor" systemColor="labelColor"/>
                                         <constraints>
@@ -211,7 +212,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Exchange" id="eGe-Lh-Kmt">
-                        <imageReference key="image" image="exchange" symbolScale="large"/>
+                        <imageReference key="image" image="exchange-icon" symbolScale="large"/>
                     </tabBarItem>
                     <connections>
                         <outlet property="dowloadInProgressView" destination="oba-ju-gXW" id="5jS-dl-SIS"/>
@@ -237,7 +238,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="CIt-gG-Dsx" userLabel="Title">
                                 <rect key="frame" x="20" y="59" width="388" height="37"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="translate" translatesAutoresizingMaskIntoConstraints="NO" id="l45-rI-Kfr">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="translate-icon" translatesAutoresizingMaskIntoConstraints="NO" id="l45-rI-Kfr">
                                         <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>
                                         <color key="tintColor" name="AccentColor"/>
                                         <constraints>
@@ -258,14 +259,15 @@
                                 <subviews>
                                     <label opaque="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="▼ French" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eBX-oy-UUl">
                                         <rect key="frame" x="0.0" y="0.0" width="164.66666666666666" height="40"/>
+                                        <color key="tintColor" name="AccentColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="QoF-YQ-DZR"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" name="AccentColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="rightArrow" translatesAutoresizingMaskIntoConstraints="NO" id="hak-lm-uHR">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="right-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="hak-lm-uHR">
                                         <rect key="frame" x="180.66666666666666" y="0.0" width="26.666666666666657" height="40"/>
                                         <color key="tintColor" name="AccentColor"/>
                                         <constraints>
@@ -275,7 +277,7 @@
                                     <label opaque="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English ▼" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BSl-GV-eRY">
                                         <rect key="frame" x="223.33333333333337" y="0.0" width="164.66666666666663" height="40"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" name="AccentColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -340,7 +342,7 @@
                             <view opaque="NO" alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jiv-yF-nQb" userLabel="Download In progress view">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="843"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="czw-nz-l1O">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="czw-nz-l1O">
                                         <rect key="frame" x="194" y="401.66666666666669" width="40" height="40"/>
                                         <color key="tintColor" systemColor="labelColor"/>
                                         <constraints>
@@ -402,7 +404,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Translate" id="GAI-Tq-JFE">
-                        <imageReference key="image" image="translate" symbolScale="large"/>
+                        <imageReference key="image" image="translate-icon" symbolScale="large"/>
                         <inset key="largeContentSizeImageInsets" minX="0.0" minY="-5" maxX="0.0" maxY="0.0"/>
                     </tabBarItem>
                     <connections>
@@ -430,7 +432,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="6Vi-53-3iX" userLabel="Title">
                                 <rect key="frame" x="20" y="59" width="388" height="37"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="weather" translatesAutoresizingMaskIntoConstraints="NO" id="RYa-iQ-h9l">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="weather-icon" translatesAutoresizingMaskIntoConstraints="NO" id="RYa-iQ-h9l">
                                         <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>
                                         <color key="tintColor" name="AccentColor"/>
                                         <constraints>
@@ -471,7 +473,10 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="L1A-Y7-Vw8"/>
                                         </constraints>
-                                        <buttonConfiguration key="configuration" style="plain" title="Add"/>
+                                        <color key="tintColor" name="AccentColor"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Add">
+                                            <color key="baseForegroundColor" name="AccentColor"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="addCityButtonTouched" destination="cXs-NT-o08" eventType="touchUpInside" id="xUB-UG-PcJ"/>
                                         </connections>
@@ -506,19 +511,20 @@
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z8i-R9-gE9">
-                                                            <rect key="frame" x="58" y="10" width="189" height="30"/>
+                                                            <rect key="frame" x="58" y="5" width="189" height="40"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="102 °F" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kov-fJ-ORT">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="159" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="149" height="40"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="thermometer" translatesAutoresizingMaskIntoConstraints="NO" id="FVy-HJ-cIb">
-                                                                    <rect key="frame" x="159" y="0.0" width="30" height="30"/>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="thermomether" translatesAutoresizingMaskIntoConstraints="NO" id="FVy-HJ-cIb">
+                                                                    <rect key="frame" x="149" y="0.0" width="40" height="40"/>
                                                                     <color key="tintColor" name="AccentColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="FVy-HJ-cIb" secondAttribute="height" id="HTv-Es-wzi"/>
+                                                                        <constraint firstAttribute="height" constant="40" id="eN6-fo-g5g"/>
                                                                     </constraints>
                                                                 </imageView>
                                                             </subviews>
@@ -546,14 +552,14 @@
                                                         </imageView>
                                                     </subviews>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="a0V-VI-iHT">
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="a0V-VI-iHT">
                                                     <rect key="frame" x="20" y="151" width="237" height="75"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="vRI-Ee-nr8">
-                                                            <rect key="frame" x="0.0" y="0.0" width="108.66666666666667" height="75"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="113.66666666666667" height="75"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Min: 30 °F" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7PZ-nW-N88">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="108.66666666666667" height="25"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="113.66666666666667" height="25"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="25" id="Vks-fu-JNu"/>
                                                                     </constraints>
@@ -562,7 +568,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max: 110 °F" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTZ-81-ViY">
-                                                                    <rect key="frame" x="0.0" y="50" width="108.66666666666667" height="25"/>
+                                                                    <rect key="frame" x="0.0" y="50" width="113.66666666666667" height="25"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="25" id="bCp-FT-YJR"/>
                                                                     </constraints>
@@ -573,12 +579,12 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="boB-Jw-0YR">
-                                                            <rect key="frame" x="128.66666666666666" y="0.0" width="108.33333333333334" height="75"/>
+                                                            <rect key="frame" x="123.66666666666666" y="0.0" width="113.33333333333334" height="75"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Vbg-OY-Egp">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="108.33333333333333" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="113.33333333333333" height="30"/>
                                                                     <subviews>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunrise" translatesAutoresizingMaskIntoConstraints="NO" id="kll-bI-5yR">
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunrise-icon" translatesAutoresizingMaskIntoConstraints="NO" id="kll-bI-5yR">
                                                                             <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                             <color key="tintColor" systemColor="systemYellowColor"/>
                                                                             <constraints>
@@ -587,7 +593,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6:15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goJ-np-krb">
-                                                                            <rect key="frame" x="39.999999999999993" y="5" width="68.333333333333314" height="20.333333333333332"/>
+                                                                            <rect key="frame" x="39.999999999999993" y="5" width="73.333333333333314" height="20.333333333333332"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -595,9 +601,9 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4qc-lg-04J">
-                                                                    <rect key="frame" x="0.0" y="45" width="108.33333333333333" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="45" width="113.33333333333333" height="30"/>
                                                                     <subviews>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunset" translatesAutoresizingMaskIntoConstraints="NO" id="hd1-BK-W3B">
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunset-icon" translatesAutoresizingMaskIntoConstraints="NO" id="hd1-BK-W3B">
                                                                             <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                             <color key="tintColor" systemColor="systemYellowColor"/>
                                                                             <constraints>
@@ -606,7 +612,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20:34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cam-Eg-6Yj">
-                                                                            <rect key="frame" x="39.999999999999993" y="5" width="68.333333333333314" height="20.333333333333332"/>
+                                                                            <rect key="frame" x="39.999999999999993" y="5" width="73.333333333333314" height="20.333333333333332"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -680,7 +686,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Weather" id="tWO-SI-C1q">
-                        <imageReference key="image" image="weather" symbolScale="large"/>
+                        <imageReference key="image" image="weather-icon" symbolScale="large"/>
                     </tabBarItem>
                     <connections>
                         <outlet property="collectionView" destination="C3R-MH-j5q" id="zYE-8S-Ozl"/>
@@ -693,14 +699,14 @@
         </scene>
     </scenes>
     <resources>
-        <image name="exchange" width="12" height="12"/>
+        <image name="exchange-icon" width="16" height="16"/>
         <image name="location" width="153.66667175292969" height="153.66667175292969"/>
-        <image name="rightArrow" width="13" height="9"/>
-        <image name="sunrise" width="13" height="11"/>
-        <image name="sunset" width="13" height="11"/>
-        <image name="thermometer" width="7" height="11"/>
-        <image name="translate" width="15" height="13"/>
-        <image name="weather" width="15" height="15"/>
+        <image name="right-arrow" width="16" height="16"/>
+        <image name="sunrise-icon" width="128" height="128"/>
+        <image name="sunset-icon" width="128" height="128"/>
+        <image name="thermomether" width="128" height="128"/>
+        <image name="translate-icon" width="16" height="16"/>
+        <image name="weather-icon" width="16" height="16"/>
         <namedColor name="AccentColor">
             <color red="0.96399998664855957" green="0.53799998760223389" blue="0.013000000268220901" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
