@@ -70,7 +70,7 @@
                                         <color key="textColor" name="AccentColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dollars (USD) ▼" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JcL-at-dwn">
+                                    <label opaque="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="United States Dollar (USD) ▼" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JcL-at-dwn">
                                         <rect key="frame" x="201.66666666666663" y="0.0" width="186.33333333333337" height="40"/>
                                         <color key="tintColor" name="AccentColor"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
