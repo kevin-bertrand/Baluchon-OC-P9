@@ -194,11 +194,11 @@ extension ExchangeController: UIPickerViewDelegate, UITableViewDelegate, UITextF
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch _selectedPicker {
         case 1:
-            _exchangeRate.startLanguage = _exchangeRate.rates[row].currency
+            _exchangeRate.sourceCurrency = _exchangeRate.rates[row].currency
             _moneyToExchangeDidChange()
             startCurrencyLabel.text = "▼ \(_exchangeRate.rates[row].symbol) (\(_exchangeRate.rates[row].currency))"
         case 2:
-            _exchangeRate.exchangedCurrency = _exchangeRate.rates[row].currency
+            _exchangeRate.targetCurrency = _exchangeRate.rates[row].currency
             _moneyToExchangeDidChange()
             targetCurrencyLabel.text = "\(_exchangeRate.rates[row].symbol) (\(_exchangeRate.rates[row].currency)) ▼"
         default:

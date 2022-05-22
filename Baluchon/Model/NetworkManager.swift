@@ -13,8 +13,12 @@ class NetworkManager {
     static let shared = NetworkManager()
     
     // MARK: Methods
-    func performApiRequest(for url: String, urlParams: [String: String], httpMethod: HttpMethod, body: [String:Any]? = nil, completionHandler: @escaping ((Data?) -> Void)) {
-        guard let url = formatRequest(url, params: urlParams) else {
+    func performApiRequest(for url: String,
+                           urlParams: [String: String],
+                           httpMethod: HttpMethod,
+                           body: [String:Any]? = nil,
+                           completionHandler: @escaping ((Data?) -> Void)) {
+        guard let url = _formatUrl(url, params: urlParams) else {
             return completionHandler(nil)
         }
         
@@ -22,7 +26,7 @@ class NetworkManager {
         request.httpMethod = httpMethod.rawValue
         
         if let body = body {
-            request.httpBody = formatBody(body)
+            request.httpBody = _formatBody(body)
         }
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: request) { data, response, error in
@@ -41,7 +45,7 @@ class NetworkManager {
     
     // MARK: Methods
     /// Format the body of a request.
-    private func formatBody(_ body: [String: Any]) -> Data? {
+    private func _formatBody(_ body: [String: Any]) -> Data? {
         var bodyQuery = ""
         for (key, value) in body {
             if !bodyQuery.isEmpty {
@@ -54,7 +58,7 @@ class NetworkManager {
     }
     
     /// Format the url of a request with components
-    private func formatRequest(_ url: String, params: [String: String]) -> URL? {
+    private func _formatUrl(_ url: String, params: [String: String]) -> URL? {
         guard var components = URLComponents(string: url) else { return nil }
         components.queryItems = [URLQueryItem]()
         

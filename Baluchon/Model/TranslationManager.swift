@@ -9,6 +9,7 @@ import Foundation
 
 class TranslationManager {
     // MARK: Public
+    // MARK: Properties
     var translatedText: String = ""
     var sourceLanguage: String = "fr"
     var targetLanguage: String = "en"
@@ -20,6 +21,13 @@ class TranslationManager {
     }
     
     // MARK: Methods
+    /// Class initialization
+    init() {
+        _supportedTargetLanguages = [Language(language: "en", name: "English"),
+                                     Language(language: "fr", name: "French")]
+        _supportedSourceLanguages = _supportedTargetLanguages
+    }
+    
     /// Perform the translation from french to english for a given text
     func performTranlation(of text: String) {
         if sourceLanguage == "auto" {
@@ -38,33 +46,39 @@ class TranslationManager {
                 self._supportedTargetLanguages = supportedLanguages.data.languages
                 self._supportedSourceLanguages = self._supportedTargetLanguages
                 self._supportedSourceLanguages.insert(Language(language: "auto", name: "Auto-detection"), at: 0)
-                NotificationManager.shared.sendFor(.supportedLanguagesDowloaded)
+                NotificationManager.shared.send(.supportedLanguagesDowloaded)
             }
         }
     }
-            
+    
     // MARK: Private
     // MARK: Properties
     private let _apiKey = "AIzaSyBoRbi74R8lfICetP5I9FpNtjV5ZRmjYhI"
-    private var _supportedTargetLanguages: [Language] = [Language(language: "en", name: "English"), Language(language: "fr", name: "French")]
-    private var _supportedSourceLanguages: [Language] = [Language(language: "en", name: "English"), Language(language: "fr", name: "French")]
+    private var _supportedTargetLanguages: [Language]
+    private var _supportedSourceLanguages: [Language]
     
     // MARK: Methods
     /// Perform the request to download translation
     private func _makeTranslateRequest(of textToTranslate: String) {
-        let urlParams = ["key": _apiKey, "q": textToTranslate, "source": sourceLanguage, "target": targetLanguage, "format": "text"]
-        NetworkManager.shared.performApiRequest(for: Translation.translate.getURL(), urlParams: urlParams, httpMethod: Translation.translate.getHTTPMethod(), body: nil) { data in
+        let urlParams = ["key": _apiKey,
+                         "q": textToTranslate,
+                         "source": sourceLanguage,
+                         "target": targetLanguage,
+                         "format": "text"]
+        NetworkManager.shared.performApiRequest(for: Translation.translate.getURL(),
+                                                urlParams: urlParams,
+                                                httpMethod: Translation.translate.getHTTPMethod()) { data in
             if let data = data {
                 do {
                     if let resultDict = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any] {
                         self.translatedText = self._getTranslation(of: resultDict)
-                        NotificationManager.shared.sendFor(.updateTranslation)
+                        NotificationManager.shared.send(.updateTranslation)
                     }
                 } catch {
-                    NotificationManager.shared.sendFor(.errorDuringTranslating)
+                    NotificationManager.shared.send(.errorDuringTranslating)
                 }
             } else {
-                NotificationManager.shared.sendFor(.errorDuringTranslating)
+                NotificationManager.shared.send(.errorDuringTranslating)
             }
         }
     }
@@ -93,15 +107,17 @@ class TranslationManager {
     /// Detect source language
     private func _detectLanguage(of text: String) {
         let urlParams = ["q": text, "key": _apiKey]
-        NetworkManager.shared.performApiRequest(for: Translation.detectLanguage.getURL(), urlParams: urlParams, httpMethod: Translation.detectLanguage.getHTTPMethod()) { data in
+        NetworkManager.shared.performApiRequest(for: Translation.detectLanguage.getURL(),
+                                                urlParams: urlParams,
+                                                httpMethod: Translation.detectLanguage.getHTTPMethod()) { data in
             if let data = data,
                let jsonData = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any],
                let language = self._getDetectedSourceLanguage(of: jsonData){
                 self.sourceLanguage = language
-                NotificationManager.shared.sendFor(.updateSourceLanguage)
+                NotificationManager.shared.send(.updateSourceLanguage)
                 self._makeTranslateRequest(of: text)
             } else {
-                NotificationManager.shared.sendFor(.cannotDetectLanguage)
+                NotificationManager.shared.send(.cannotDetectLanguage)
             }
         }
     }
@@ -118,7 +134,6 @@ class TranslationManager {
             }
         }
            
-        
         return sourceLanguage
     }
 }

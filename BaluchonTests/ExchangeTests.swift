@@ -30,8 +30,8 @@ class ExchangeTests: XCTestCase {
     
     func testGivenWantingToChangeMoney_WhenApplyRates_ThenGettingConvertedValue() {
         // Given
-        exchange.startLanguage = "EUR"
-        exchange.exchangedCurrency = "USD"
+        exchange.sourceCurrency = "EUR"
+        exchange.targetCurrency = "USD"
         
         // When
         let convertedValue = exchange.convertValue(5.0)
@@ -42,8 +42,8 @@ class ExchangeTests: XCTestCase {
     
     func testGivenWaintingToChangeMoney_WhenUnknownTargetCurrency_ThenTringToConvert() {
         // Given
-        exchange.startLanguage = "EUR"
-        exchange.exchangedCurrency = "AZERTY"
+        exchange.sourceCurrency = "EUR"
+        exchange.targetCurrency = "AZERTY"
         
         // When
         let convertedValue = exchange.convertValue(5.0)

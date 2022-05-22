@@ -18,12 +18,12 @@ class WeatherManager {
     /// Getting the temperature of an entered city name
     func getTemperatureOf(city: String) {
         // 1 - Get coordinates
-        _getCoordinatesOf(city: city) { cityData in
+        _getCoordinatesOf(city) { cityData in
             if let cityData = cityData {
                 // 2 - Get temperature
                 self._getTemperature(of: cityData, isCurrentLocation: false)
             } else {
-                NotificationManager.shared.sendFor(.cityDoesntExist)
+                NotificationManager.shared.send(.cityDoesntExist)
             }
         }
     }
@@ -42,9 +42,11 @@ class WeatherManager {
     
     // MARK: Methods
     /// Getting coordinates from a given city name
-    private func _getCoordinatesOf(city: String, completionHandler: @escaping ((CityInformations?) -> Void)) {
+    private func _getCoordinatesOf(_ city: String, completionHandler: @escaping ((CityInformations?) -> Void)) {
         let urlParams = ["q": city, "appid":_apiKey]
-        NetworkManager.shared.performApiRequest(for: _getLocationCityURL, urlParams: urlParams, httpMethod: .get) { data in
+        NetworkManager.shared.performApiRequest(for: _getLocationCityURL,
+                                                urlParams: urlParams,
+                                                httpMethod: .get) { data in
             if let data = data,
                let cityData = try? JSONDecoder().decode([CityInformations].self, from: data),
                let cityData = cityData.first {
@@ -57,8 +59,13 @@ class WeatherManager {
     
     /// Getting temperature of a given point with its coordinates.
     private func _getTemperature(of coordinates: CityInformations, isCurrentLocation: Bool) {
-        let urlParams = ["lat": "\(coordinates.lat)", "lon": "\(coordinates.lon)", "units":"metric", "appid": _apiKey]
-        NetworkManager.shared.performApiRequest(for: _getWeatherUrl, urlParams: urlParams, httpMethod: .get) { data in
+        let urlParams = ["lat": "\(coordinates.lat)",
+                         "lon": "\(coordinates.lon)",
+                         "units":"metric",
+                         "appid": _apiKey]
+        NetworkManager.shared.performApiRequest(for: _getWeatherUrl,
+                                                urlParams: urlParams,
+                                                httpMethod: .get) { data in
             if let data = data,
                 var weatherData = try? JSONDecoder().decode(Weather.self, from: data) {
                 // Check if a name was given when checking coordinates (more precise than name on weather forecasts).
@@ -74,11 +81,11 @@ class WeatherManager {
                 // Download the condition icon
                 self._dowloadConditionImage(for: weatherData) { weather in
                     self._weathers.append(weather)
-                    NotificationManager.shared.sendFor(.updateWeather)
+                    NotificationManager.shared.send(.updateWeather)
                 }
             } else {
                 // If there is an error during downloading the temperature -> sending a notification error
-                NotificationManager.shared.sendFor(.errorDuringDownloadingWeather)
+                NotificationManager.shared.send(.errorDuringDownloadingWeather)
             }
         }
     }
@@ -88,7 +95,7 @@ class WeatherManager {
         var cityAlreadyShown: Bool = false
         if let cityName = cityName,
            self._weathers.contains(where: { $0.name == cityName}) {
-            NotificationManager.shared.sendFor(.cityAlreadyAdded)
+            NotificationManager.shared.send(.cityAlreadyAdded)
             cityAlreadyShown = true
         }
         return cityAlreadyShown
@@ -96,7 +103,9 @@ class WeatherManager {
     
     /// Getting the icon of the current weather condition
     private func _dowloadConditionImage(for weather: Weather, completionHandler: @escaping((Weather) -> Void)) {
-        NetworkManager.shared.performApiRequest(for: "http://openweathermap.org/img/wn/\(weather.weather[0].icon)@2x.png", urlParams: [:], httpMethod: .get) { data in
+        NetworkManager.shared.performApiRequest(for: "http://openweathermap.org/img/wn/\(weather.weather[0].icon)@2x.png",
+                                                urlParams: [:],
+                                                httpMethod: .get) { data in
             if let icon = data {
                 var newWeatherInformations = weather
                 newWeatherInformations.icon = icon
