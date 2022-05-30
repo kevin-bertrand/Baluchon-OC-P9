@@ -18,7 +18,8 @@ class WeatherManager {
     /// Getting the temperature of an entered city name
     func getTemperatureOf(city: String) {
         // 1 - Get coordinates
-        _getCoordinatesOf(city) { cityData in
+        _getCoordinatesOf(city) { [weak self] cityData in
+            guard let self = self else { return }
             if let cityData = cityData {
                 // 2 - Get temperature
                 self._getTemperature(of: cityData, isCurrentLocation: false)
