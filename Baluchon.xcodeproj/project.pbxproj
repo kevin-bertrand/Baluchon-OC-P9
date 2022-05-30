@@ -20,6 +20,8 @@
 		062E67432816D177005AACE4 /* WeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062E67422816D177005AACE4 /* WeatherController.swift */; };
 		062E67452816D2F7005AACE4 /* TranslateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062E67442816D2F7005AACE4 /* TranslateController.swift */; };
 		062E67472816D311005AACE4 /* ExchangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062E67462816D311005AACE4 /* ExchangeController.swift */; };
+		0657591628410784006055BB /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0657591528410784006055BB /* NetworkSession.swift */; };
+		06575918284107B7006055BB /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06575917284107B7006055BB /* URLSession.swift */; };
 		06794E5B282E4ED9005ACCB5 /* ExchangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06794E5A282E4ED9005ACCB5 /* ExchangeTests.swift */; };
 		06794E5D282E67D9005ACCB5 /* TranslationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06794E5C282E67D9005ACCB5 /* TranslationTests.swift */; };
 		06794E5F282E7A47005ACCB5 /* WeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06794E5E282E7A47005ACCB5 /* WeatherTests.swift */; };
@@ -31,6 +33,7 @@
 		06C552522812E6DE0048C41C /* Baluchon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 06C552502812E6DE0048C41C /* Baluchon.xcdatamodeld */; };
 		06C552542812E6E10048C41C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06C552532812E6E10048C41C /* Assets.xcassets */; };
 		06C552572812E6E10048C41C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06C552552812E6E10048C41C /* LaunchScreen.storyboard */; };
+		06D05DA5283AAEAC009545AE /* ButtonStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D05DA4283AAEAC009545AE /* ButtonStyling.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,8 @@
 		062E67422816D177005AACE4 /* WeatherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherController.swift; sourceTree = "<group>"; };
 		062E67442816D2F7005AACE4 /* TranslateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateController.swift; sourceTree = "<group>"; };
 		062E67462816D311005AACE4 /* ExchangeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeController.swift; sourceTree = "<group>"; };
+		0657591528410784006055BB /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
+		06575917284107B7006055BB /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		06794E5A282E4ED9005ACCB5 /* ExchangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTests.swift; sourceTree = "<group>"; };
 		06794E5C282E67D9005ACCB5 /* TranslationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationTests.swift; sourceTree = "<group>"; };
 		06794E5E282E7A47005ACCB5 /* WeatherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTests.swift; sourceTree = "<group>"; };
@@ -71,6 +76,7 @@
 		06C552562812E6E10048C41C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		06C552582812E6E10048C41C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06C5525D2812E6E10048C41C /* BaluchonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaluchonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		06D05DA4283AAEAC009545AE /* ButtonStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyling.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +97,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0657591428410774006055BB /* Mocking */ = {
+			isa = PBXGroup;
+			children = (
+				0657591528410784006055BB /* NetworkSession.swift */,
+				06575917284107B7006055BB /* URLSession.swift */,
+			);
+			path = Mocking;
+			sourceTree = "<group>";
+		};
 		06C5523B2812E6DE0048C41C = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +127,7 @@
 		06C552462812E6DE0048C41C /* Baluchon */ = {
 			isa = PBXGroup;
 			children = (
+				0657591428410774006055BB /* Mocking */,
 				06C5527D2812E6FA0048C41C /* Supporting Files */,
 				06C5527A2812E6EE0048C41C /* Model */,
 				06C5527C2812E6F60048C41C /* Controller */,
@@ -153,6 +169,7 @@
 				062E673A2816C975005AACE4 /* CollectionViewCell.swift */,
 				06210BE92816E00100D5E3E6 /* TopRoundedTextView.swift */,
 				06210BEB2816E08D00D5E3E6 /* BottomRoundedTextView.swift */,
+				06D05DA4283AAEAC009545AE /* ButtonStyling.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -282,11 +299,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				06C552522812E6DE0048C41C /* Baluchon.xcdatamodeld in Sources */,
+				0657591628410784006055BB /* NetworkSession.swift in Sources */,
 				062E673B2816C975005AACE4 /* CollectionViewCell.swift in Sources */,
 				062E67472816D311005AACE4 /* ExchangeController.swift in Sources */,
 				06C552482812E6DE0048C41C /* AppDelegate.swift in Sources */,
 				06210BF4281839D300D5E3E6 /* Translation.swift in Sources */,
 				06210BF02816F8BF00D5E3E6 /* ExchangeManager.swift in Sources */,
+				06D05DA5283AAEAC009545AE /* ButtonStyling.swift in Sources */,
+				06575918284107B7006055BB /* URLSession.swift in Sources */,
 				06210BEA2816E00100D5E3E6 /* TopRoundedTextView.swift in Sources */,
 				06210BEE2816E44A00D5E3E6 /* Exchange.swift in Sources */,
 				06210BF22817E19900D5E3E6 /* Notification.swift in Sources */,

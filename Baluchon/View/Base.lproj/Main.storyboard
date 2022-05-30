@@ -318,7 +318,7 @@
                                     <constraint firstItem="EMw-qQ-QQu" firstAttribute="height" secondItem="Tx5-hX-J4C" secondAttribute="height" id="Fzx-ve-ju2"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qqi-uR-VPi">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qqi-uR-VPi" customClass="ButtonStyling" customModule="Baluchon" customModuleProvider="target">
                                 <rect key="frame" x="40" y="793" width="348" height="40"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>

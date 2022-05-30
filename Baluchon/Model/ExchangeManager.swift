@@ -20,7 +20,8 @@ class ExchangeManager {
         let urlParams: [String: String] = ["base": "EUR", "apikey": _apiKey]
         NetworkManager.shared.performApiRequest(for: _rateUrl,
                                                 urlParams: urlParams,
-                                                httpMethod: .get) { data in
+                                                httpMethod: .get) { [weak self] data in
+            guard let self = self else { return }
             if let data = data,
                let exchangeData = try? JSONDecoder().decode(ExchangeData.self, from: data) {
                 self._getSymbols { data in

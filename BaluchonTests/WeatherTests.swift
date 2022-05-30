@@ -49,7 +49,7 @@ class WeatherTests: XCTestCase {
         
         // When
         weather.getTemperatureFromCoordinates(lat: latitude, lon: longitude)
-        sleep(5)
+        sleep(10)
         
         // Then
         XCTAssertTrue(weather.weathers.count == 1)

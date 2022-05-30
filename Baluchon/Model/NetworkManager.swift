@@ -28,20 +28,24 @@ class NetworkManager {
         if let body = body {
             request.httpBody = _formatBody(body)
         }
-        let session = URLSession(configuration: .default)
-        let task = session.dataTask(with: request) { data, response, error in
-            if let response = response as? HTTPURLResponse,
-               response.statusCode == 200 || response.statusCode == 201 {
+        
+        session.loadData(with: request) { data, error in
+            if let data = data {
                 completionHandler(data)
             } else {
                 completionHandler(nil)
             }
         }
-        task.resume()
+    }
+    
+    // MARK: Initialization
+    init(session: NetworkSession = URLSession.shared) {
+        self.session = session
     }
     
     // MARK: Private
     // MARK: Properties
+    private let session: NetworkSession
     
     // MARK: Methods
     /// Format the body of a request.

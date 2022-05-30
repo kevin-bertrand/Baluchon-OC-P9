@@ -65,7 +65,8 @@ class WeatherManager {
                          "appid": _apiKey]
         NetworkManager.shared.performApiRequest(for: _getWeatherUrl,
                                                 urlParams: urlParams,
-                                                httpMethod: .get) { data in
+                                                httpMethod: .get) { [weak self] data in
+            guard let self = self else { return }
             if let data = data,
                 var weatherData = try? JSONDecoder().decode(Weather.self, from: data) {
                 // Check if a name was given when checking coordinates (more precise than name on weather forecasts).

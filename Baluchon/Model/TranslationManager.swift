@@ -40,7 +40,8 @@ class TranslationManager {
     /// Download supported languaages 
     func getSupportedLanguages() {
         let urlParams = ["key": _apiKey]
-        NetworkManager.shared.performApiRequest(for: Translation.supportedLanguages.getURL(), urlParams: urlParams, httpMethod: Translation.supportedLanguages.getHTTPMethod(), body: ["target": "en"]) { data in
+        NetworkManager.shared.performApiRequest(for: Translation.supportedLanguages.getURL(), urlParams: urlParams, httpMethod: Translation.supportedLanguages.getHTTPMethod(), body: ["target": "en"]) { [weak self] data in
+            guard let self = self else { return }
             if let data = data,
                let supportedLanguages = try? JSONDecoder().decode(SupportedLanguagesData.self, from: data){
                 self._supportedTargetLanguages = supportedLanguages.data.languages
@@ -67,7 +68,8 @@ class TranslationManager {
                          "format": "text"]
         NetworkManager.shared.performApiRequest(for: Translation.translate.getURL(),
                                                 urlParams: urlParams,
-                                                httpMethod: Translation.translate.getHTTPMethod()) { data in
+                                                httpMethod: Translation.translate.getHTTPMethod()) { [weak self] data in
+            guard let self = self else { return }
             if let data = data {
                 do {
                     if let resultDict = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any] {
@@ -109,7 +111,8 @@ class TranslationManager {
         let urlParams = ["q": text, "key": _apiKey]
         NetworkManager.shared.performApiRequest(for: Translation.detectLanguage.getURL(),
                                                 urlParams: urlParams,
-                                                httpMethod: Translation.detectLanguage.getHTTPMethod()) { data in
+                                                httpMethod: Translation.detectLanguage.getHTTPMethod()) { [weak self] data in
+            guard let self = self else { return }
             if let data = data,
                let jsonData = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any],
                let language = self._getDetectedSourceLanguage(of: jsonData){
