@@ -22,10 +22,13 @@ class TranslationManager {
     
     // MARK: Methods
     /// Class initialization
-    init() {
+    init(detectLanguageSession: URLSession = .shared, translateSession: URLSession = .shared, getSupportedLanguagesSession: URLSession = .shared) {
         _supportedTargetLanguages = [Language(language: "en", name: "English"),
                                      Language(language: "fr", name: "French")]
         _supportedSourceLanguages = _supportedTargetLanguages
+        _detectLanguageSession = detectLanguageSession
+        _translateSession = translateSession
+        _getSupportedLanguagesSession = getSupportedLanguagesSession
     }
     
     /// Perform the translation from french to english for a given text
@@ -40,7 +43,7 @@ class TranslationManager {
     /// Download supported languaages 
     func getSupportedLanguages() {
         let urlParams = ["key": _apiKey]
-        NetworkManager.shared.performApiRequest(for: Translation.supportedLanguages.getURL(), urlParams: urlParams, httpMethod: Translation.supportedLanguages.getHTTPMethod(), body: ["target": "en"]) { [weak self] data in
+        NetworkManager.shared(session: _getSupportedLanguagesSession).performApiRequest(for: Translation.supportedLanguages.getURL(), urlParams: urlParams, httpMethod: Translation.supportedLanguages.getHTTPMethod(), body: ["target": "en"]) { [weak self] data in
             guard let self = self else { return }
             if let data = data,
                let supportedLanguages = try? JSONDecoder().decode(SupportedLanguagesData.self, from: data){
@@ -57,6 +60,9 @@ class TranslationManager {
     private let _apiKey = "AIzaSyBoRbi74R8lfICetP5I9FpNtjV5ZRmjYhI"
     private var _supportedTargetLanguages: [Language]
     private var _supportedSourceLanguages: [Language]
+    private let _detectLanguageSession: URLSession
+    private let _translateSession: URLSession
+    private let _getSupportedLanguagesSession: URLSession
     
     // MARK: Methods
     /// Perform the request to download translation
@@ -66,7 +72,7 @@ class TranslationManager {
                          "source": sourceLanguage,
                          "target": targetLanguage,
                          "format": "text"]
-        NetworkManager.shared.performApiRequest(for: Translation.translate.getURL(),
+        NetworkManager.shared(session: _translateSession).performApiRequest(for: Translation.translate.getURL(),
                                                 urlParams: urlParams,
                                                 httpMethod: Translation.translate.getHTTPMethod()) { [weak self] data in
             guard let self = self else { return }
@@ -109,7 +115,7 @@ class TranslationManager {
     /// Detect source language
     private func _detectLanguage(of text: String) {
         let urlParams = ["q": text, "key": _apiKey]
-        NetworkManager.shared.performApiRequest(for: Translation.detectLanguage.getURL(),
+        NetworkManager.shared(session: _detectLanguageSession).performApiRequest(for: Translation.detectLanguage.getURL(),
                                                 urlParams: urlParams,
                                                 httpMethod: Translation.detectLanguage.getHTTPMethod()) { [weak self] data in
             guard let self = self else { return }

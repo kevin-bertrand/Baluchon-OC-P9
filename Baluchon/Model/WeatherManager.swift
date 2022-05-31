@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class WeatherManager {
     // MARK: Public
@@ -34,18 +35,28 @@ class WeatherManager {
         self._getTemperature(of: CityInformations(name: nil, lat: lat, lon: lon), isCurrentLocation: true)
     }
     
+    // MARK: Initialization
+    init(conditionSession: URLSession = .shared, conditionImageSession: URLSession = .shared, coordinatesSession: URLSession = .shared) {
+        _getCoordinatesSession = coordinatesSession
+        _getImageSession = conditionImageSession
+        _getConditionSession = conditionSession
+    }
+    
     // MARK: Private
     // MARK: Properties
     private var _weathers: [Weather] = []
     private let _apiKey = "dfd64c07c118f713c2866795defbe20f"
     private let _getLocationCityURL = "http://api.openweathermap.org/geo/1.0/direct?"
     private let _getWeatherUrl = "https://api.openweathermap.org/data/2.5/weather?"
+    private let _getImageSession: URLSession
+    private let _getConditionSession: URLSession
+    private let _getCoordinatesSession: URLSession
     
     // MARK: Methods
     /// Getting coordinates from a given city name
     private func _getCoordinatesOf(_ city: String, completionHandler: @escaping ((CityInformations?) -> Void)) {
         let urlParams = ["q": city, "appid":_apiKey]
-        NetworkManager.shared.performApiRequest(for: _getLocationCityURL,
+        NetworkManager.shared(session: _getCoordinatesSession).performApiRequest(for: _getLocationCityURL,
                                                 urlParams: urlParams,
                                                 httpMethod: .get) { data in
             if let data = data,
@@ -64,7 +75,7 @@ class WeatherManager {
                          "lon": "\(coordinates.lon)",
                          "units":"metric",
                          "appid": _apiKey]
-        NetworkManager.shared.performApiRequest(for: _getWeatherUrl,
+        NetworkManager.shared(session: _getConditionSession).performApiRequest(for: _getWeatherUrl,
                                                 urlParams: urlParams,
                                                 httpMethod: .get) { [weak self] data in
             guard let self = self else { return }
@@ -105,12 +116,12 @@ class WeatherManager {
     
     /// Getting the icon of the current weather condition
     private func _dowloadConditionImage(for weather: Weather, completionHandler: @escaping((Weather) -> Void)) {
-        NetworkManager.shared.performApiRequest(for: "http://openweathermap.org/img/wn/\(weather.weather[0].icon)@2x.png",
+        NetworkManager.shared(session: _getImageSession).performApiRequest(for: "http://openweathermap.org/img/wn/\(weather.weather[0].icon)@2x.png",
                                                 urlParams: [:],
                                                 httpMethod: .get) { data in
-            if let icon = data {
+            if let data = data, let _ = UIImage(data: data) {
                 var newWeatherInformations = weather
-                newWeatherInformations.icon = icon
+                newWeatherInformations.icon = data
                 completionHandler(newWeatherInformations)
             } else {
                 completionHandler(weather)

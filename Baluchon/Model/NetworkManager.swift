@@ -9,9 +9,6 @@ import Foundation
 
 class NetworkManager {
     // MARK: Public
-    // MARK: Properties
-    static let shared = NetworkManager()
-    
     // MARK: Methods
     func performApiRequest(for url: String,
                            urlParams: [String: String],
@@ -29,23 +26,34 @@ class NetworkManager {
             request.httpBody = _formatBody(body)
         }
         
-        session.loadData(with: request) { data, error in
+        let task = _urlSession.dataTask(with: request) { data, response, error in
             if let data = data {
                 completionHandler(data)
             } else {
                 completionHandler(nil)
             }
         }
+        
+        task.resume()
+    }
+    
+    class func shared(session: URLSession = URLSession.shared) -> NetworkManager {
+        _session = session
+        return _sharedNetworkManager
     }
     
     // MARK: Initialization
-    init(session: NetworkSession = URLSession.shared) {
-        self.session = session
+    init(session: URLSession = URLSession.shared) {
+        _urlSession = session
     }
     
     // MARK: Private
     // MARK: Properties
-    private let session: NetworkSession
+    private static var _session: URLSession = .shared
+    private static var _sharedNetworkManager: NetworkManager {
+        return NetworkManager(session: _session)
+    }
+    private let _urlSession: URLSession
     
     // MARK: Methods
     /// Format the body of a request.

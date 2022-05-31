@@ -18,7 +18,7 @@ class ExchangeManager {
     /// Get current rates
     func getRates() {
         let urlParams: [String: String] = ["base": "EUR", "apikey": _apiKey]
-        NetworkManager.shared.performApiRequest(for: _rateUrl,
+        NetworkManager.shared(session: _ratesSession).performApiRequest(for: _rateUrl,
                                                 urlParams: urlParams,
                                                 httpMethod: .get) { [weak self] data in
             guard let self = self else { return }
@@ -60,18 +60,26 @@ class ExchangeManager {
         return convertValue
     }
     
+    // MARK: Initialization
+    init(symbolsSession: URLSession = .shared, ratesSession: URLSession = .shared) {
+        _symbolsSessions = symbolsSession
+        _ratesSession = ratesSession
+    }
+    
     // MARK: Private
     // MARK: Properties
     private let _apiKey = "MqnRDEmKUmziyC1KPeo7nWnF8dZXtWJQ"
     private let _rateUrl = "https://api.apilayer.com/fixer/latest?"
     private let _symbolsUrl = "https://api.apilayer.com/fixer/symbols?"
     private var _rates: [Exchange] = []
+    private let _symbolsSessions: URLSession
+    private let _ratesSession: URLSession
     
     // MARK: Methods
     /// Gettings currency symbols
     private func _getSymbols(completionHandler: @escaping ((Data?) -> Void)) {
         let urlParams: [String: String] = ["apikey": _apiKey]
-        NetworkManager.shared.performApiRequest(for: _symbolsUrl,
+        NetworkManager.shared(session: _symbolsSessions).performApiRequest(for: _symbolsUrl,
                                                 urlParams: urlParams,
                                                 httpMethod: .get) { data in
             completionHandler(data)
