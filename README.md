@@ -6,6 +6,14 @@ This app is used to:
 - Get weather forecast for a given city
 
 ## App screenshots
+### Exchange view
+<img src="/Screenshots/Rates.png" width="350">
+
+### Translation view
+<img src="/Screenshots/Translate.png" width="350">
+
+### Weather view
+<img src="/Screenshots/Weather.png" width="350">
 
 ## Technical constraints
 The application must respect the following constraints:
