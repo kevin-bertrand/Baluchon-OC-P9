@@ -35,6 +35,7 @@ class ButtonStyling: UIButton {
     }
     
     private func resetView() {
+        print("ok")
         self.backgroundColor = .init(named: "default-button-background")
     }
 }

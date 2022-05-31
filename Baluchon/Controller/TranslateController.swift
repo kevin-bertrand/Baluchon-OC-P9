@@ -17,6 +17,7 @@ class TranslateController: UIViewController {
     @IBOutlet weak var targetLanguageLabel: UILabel!
     @IBOutlet weak var downloadInProgressView: UIView!
     @IBOutlet weak var downlaodInProgressMessageLabel: UILabel!
+    @IBOutlet weak var translateButton: UIButton!
     
     // MARK: Initialisation function
     override func viewDidLoad() {
@@ -41,6 +42,9 @@ class TranslateController: UIViewController {
         
         _addTapGestureRecogniser(to: sourceLanguageLabel, perform: #selector(displayPicker))
         _addTapGestureRecogniser(to: targetLanguageLabel, perform: #selector(displayPicker))
+        translateButton.addTarget(self, action: #selector(_buttonPressed), for: .touchDown)
+        translateButton.addTarget(self, action: #selector(_buttonReleased), for: .touchUpInside)
+        translateButton.addTarget(self, action: #selector(_buttonReleased), for: .touchUpOutside)
         _translation.getSupportedLanguages()
     }
     
@@ -202,6 +206,14 @@ class TranslateController: UIViewController {
                 self._targetLanguagePicker.selectRow(targetIndex, inComponent: 0, animated: false)
             }
         }
+    }
+    
+    @objc private func _buttonPressed(_ sender: Any) {
+        translateButton.backgroundColor = UIColor(named: "touched-button-background")
+    }
+    
+    @objc private func _buttonReleased(_ sender: Any) {
+        translateButton.backgroundColor = UIColor(named: "default-button-background")
     }
 }
 

@@ -41,7 +41,6 @@
 		06C552522812E6DE0048C41C /* Baluchon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 06C552502812E6DE0048C41C /* Baluchon.xcdatamodeld */; };
 		06C552542812E6E10048C41C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06C552532812E6E10048C41C /* Assets.xcassets */; };
 		06C552572812E6E10048C41C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06C552552812E6E10048C41C /* LaunchScreen.storyboard */; };
-		06D05DA5283AAEAC009545AE /* ButtonStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D05DA4283AAEAC009545AE /* ButtonStyling.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,7 +91,6 @@
 		06C552562812E6E10048C41C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		06C552582812E6E10048C41C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06C5525D2812E6E10048C41C /* BaluchonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaluchonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		06D05DA4283AAEAC009545AE /* ButtonStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyling.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,7 +207,6 @@
 				062E673A2816C975005AACE4 /* CollectionViewCell.swift */,
 				06210BE92816E00100D5E3E6 /* TopRoundedTextView.swift */,
 				06210BEB2816E08D00D5E3E6 /* BottomRoundedTextView.swift */,
-				06D05DA4283AAEAC009545AE /* ButtonStyling.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -352,7 +349,6 @@
 				06C552482812E6DE0048C41C /* AppDelegate.swift in Sources */,
 				06210BF4281839D300D5E3E6 /* Translation.swift in Sources */,
 				06210BF02816F8BF00D5E3E6 /* ExchangeManager.swift in Sources */,
-				06D05DA5283AAEAC009545AE /* ButtonStyling.swift in Sources */,
 				06210BEA2816E00100D5E3E6 /* TopRoundedTextView.swift in Sources */,
 				06210BEE2816E44A00D5E3E6 /* Exchange.swift in Sources */,
 				06210BF22817E19900D5E3E6 /* Notification.swift in Sources */,
