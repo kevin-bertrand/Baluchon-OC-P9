@@ -39,7 +39,3 @@ class URLSessionDataTaskFake: URLSessionDataTask {
         completionHandler?(data, urlResponse, responseError)
     }
 }
-
-class URLSessionConfigurationFake: URLSessionConfiguration {
-    
-}

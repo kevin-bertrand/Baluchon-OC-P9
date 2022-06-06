@@ -11,7 +11,7 @@ class FakeResponseData {
     static let responseOk = HTTPURLResponse(url: URL(string: "https://www.google.com")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
     static let responseKO = HTTPURLResponse(url: URL(string: "https://www.google.com")!, statusCode: 500, httpVersion: nil, headerFields: nil)!
     
-    class ResponseError: Error {} // Protocol not an instance
+    class ResponseError: Error {}
     static let error = ResponseError()
     
     static func getCorrectData(for url: DataFiles) -> Data {
