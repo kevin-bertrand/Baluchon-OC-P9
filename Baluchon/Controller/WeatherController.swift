@@ -14,6 +14,7 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
     // MARK: Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var newCityField: UITextField!
+    @IBOutlet weak var weatherIsDownloading: UIView!
     
     // MARK: Initialisation fucntion
     override func viewDidLoad() {
@@ -78,6 +79,7 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
             newCityField.text = ""
             newCityField.resignFirstResponder()
         }
+        weatherIsDownloading.isHidden = false
     }
     
     @IBAction func getCurrentLocationWeatherButtonTouched() {
@@ -86,6 +88,7 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
         if CLLocationManager.locationServicesEnabled() {
             _locationManager.requestLocation()
         }
+        weatherIsDownloading.isHidden = false
     }
     
     // MARK: Private
@@ -98,6 +101,7 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
     @objc private func _processNotification(_ notification: Notification) {
         if let notificationName = notification.userInfo?["name"] as? Notification.Name {
             DispatchQueue.main.async {
+                self.weatherIsDownloading.isHidden = true
                 switch notificationName {
                 case Notification.BaluchonNotification.cityAlreadyAdded.notificationName:
                     self._showAlertViewFor(notification: .cityAlreadyAdded)

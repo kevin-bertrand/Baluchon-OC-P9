@@ -126,14 +126,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Currency" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="9wE-MM-lVu">
-                                                    <rect key="frame" x="20" y="13" width="77.666666666666671" height="23"/>
+                                                    <rect key="frame" x="20" y="10.999999999999998" width="87.333333333333329" height="26.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Amount" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XFp-ar-OyO">
-                                                    <rect key="frame" x="308" y="14.999999999999998" width="60" height="20.333333333333332"/>
+                                                    <rect key="frame" x="299" y="13" width="69" height="24"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                     <nil key="textColor"/>
@@ -669,6 +669,32 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H1i-Nf-MlI">
+                                <rect key="frame" x="94" y="403" width="240" height="120"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="1sw-xW-Nho">
+                                        <rect key="frame" x="30.333333333333329" y="26" width="179.66666666666669" height="68.333333333333329"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather downloading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AvA-Zx-hz2">
+                                                <rect key="frame" x="0.0" y="0.0" width="179.66666666666666" height="20.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="mqN-as-5xw">
+                                                <rect key="frame" x="79.666666666666671" y="48.333333333333314" width="20" height="20"/>
+                                            </activityIndicatorView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" name="defaultBackground"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="4wv-6f-RaC"/>
+                                    <constraint firstAttribute="width" constant="240" id="Ho7-TW-1Ms"/>
+                                    <constraint firstItem="1sw-xW-Nho" firstAttribute="centerX" secondItem="H1i-Nf-MlI" secondAttribute="centerX" id="TIf-Vm-diA"/>
+                                    <constraint firstItem="1sw-xW-Nho" firstAttribute="centerY" secondItem="H1i-Nf-MlI" secondAttribute="centerY" id="yod-mR-svj"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZE9-Jx-ShB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -677,8 +703,10 @@
                             <constraint firstItem="ZE9-Jx-ShB" firstAttribute="trailing" secondItem="6Vi-53-3iX" secondAttribute="trailing" constant="20" id="7ab-aE-mA7"/>
                             <constraint firstItem="VNv-dV-fqS" firstAttribute="top" secondItem="6Vi-53-3iX" secondAttribute="bottom" constant="25" id="CvU-ji-W9G"/>
                             <constraint firstItem="C3R-MH-j5q" firstAttribute="leading" secondItem="ZE9-Jx-ShB" secondAttribute="leading" constant="20" id="DzO-QI-qm6"/>
+                            <constraint firstItem="H1i-Nf-MlI" firstAttribute="centerX" secondItem="huJ-pC-Dnc" secondAttribute="centerX" id="JPI-K6-raL"/>
                             <constraint firstItem="ZE9-Jx-ShB" firstAttribute="trailing" secondItem="C3R-MH-j5q" secondAttribute="trailing" constant="20" id="Vr4-sZ-3pI"/>
                             <constraint firstItem="6Vi-53-3iX" firstAttribute="top" secondItem="ZE9-Jx-ShB" secondAttribute="top" constant="15" id="cjy-Cb-qar"/>
+                            <constraint firstItem="H1i-Nf-MlI" firstAttribute="centerY" secondItem="huJ-pC-Dnc" secondAttribute="centerY" id="g7r-2H-6ZD"/>
                             <constraint firstItem="VNv-dV-fqS" firstAttribute="leading" secondItem="ZE9-Jx-ShB" secondAttribute="leading" constant="20" id="pIy-yr-z1C"/>
                             <constraint firstItem="6Vi-53-3iX" firstAttribute="leading" secondItem="ZE9-Jx-ShB" secondAttribute="leading" constant="20" id="rDJ-Vh-bOF"/>
                             <constraint firstItem="ZE9-Jx-ShB" firstAttribute="trailing" secondItem="VNv-dV-fqS" secondAttribute="trailing" constant="20" id="w6E-ix-hVq"/>
@@ -691,6 +719,7 @@
                     <connections>
                         <outlet property="collectionView" destination="C3R-MH-j5q" id="zYE-8S-Ozl"/>
                         <outlet property="newCityField" destination="RHH-xV-UT3" id="FGX-5H-zab"/>
+                        <outlet property="weatherIsDownloading" destination="H1i-Nf-MlI" id="x0v-72-zZg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YCo-bC-jOM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -711,7 +740,10 @@
             <color red="0.96399998664855957" green="0.53799998760223389" blue="0.013000000268220901" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="default-button-background">
-            <color red="0.94954782719999997" green="0.94858580830000006" blue="0.96720105410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94999998807907104" green="0.94900000095367432" blue="0.96700000762939453" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="defaultBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="textViewBackground">
             <color red="0.92100000381469727" green="0.91100001335144043" blue="0.91100001335144043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
