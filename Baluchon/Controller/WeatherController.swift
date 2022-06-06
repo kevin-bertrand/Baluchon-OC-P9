@@ -36,7 +36,7 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
     // MARK: Methods
     /// Return the number of cell the collection view will have
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return _weather.weathers.count
+        return _weatherManager.weathers.count
     }
     
     /// Return a configurated cell
@@ -45,7 +45,7 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
         
         // Get a reusable cell with a specific identifier and with the "CollectionViewCell" class
         if let weatherCell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherCell", for: indexPath) as? CollectionViewCell {
-            weatherCell.configure(with: _weather.weathers[indexPath.row])
+            weatherCell.configure(with: _weatherManager.weathers[indexPath.row])
             cell = weatherCell
         }
         
@@ -61,7 +61,7 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
     /// Called when the user location changed
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            _weather.getTemperatureFromCoordinates(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
+            _weatherManager.getTemperatureFromCoordinates(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
         }
     }
     
@@ -75,7 +75,7 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
         if var newCity = newCityField.text {
             newCity = newCity.replacingOccurrences(of: " ", with: "-")
             newCity = newCity.folding(options: .diacriticInsensitive, locale: nil)
-            _weather.getTemperatureOf(city: newCity)
+            _weatherManager.getTemperatureOf(city: newCity)
             newCityField.text = ""
             newCityField.resignFirstResponder()
         }
@@ -93,7 +93,7 @@ class WeatherController: UIViewController, UICollectionViewDelegate, UICollectio
     
     // MARK: Private
     // MARK: Properties
-    private let _weather = WeatherManager()
+    private let _weatherManager = WeatherManager()
     private let _locationManager = CLLocationManager()
     
     // MARK: Methods
